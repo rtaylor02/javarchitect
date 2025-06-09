@@ -2,8 +2,15 @@
 permalink: /articles/
 title: "Articles"
 ---
-Article 1
+# JDK Features: 8 and Beyond
+(Trial)(www.javarchitect.com/blog/Trial-Post)
+(Pattern matching)[]
+(Record)[]
 
-Article 2
+# Multithreading and Concurrency 
 
-Article n
+# Performance Optimisation and Low Latency
+
+# JVM Related
+
+# Books Recommendation
