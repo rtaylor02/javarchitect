@@ -3,8 +3,8 @@ permalink: /articles/
 title: "Articles"
 ---
 ### JDK Features: 8 and Beyond
-[Trial](www.javarchitect.com/Trial-Post)  
-[Another trial](www.javarchitect.com/blog/Trial-Post)
+[Trial](www.javarchitect.com/blog/Trial-Post)  
+[Another trial](www.javarchitect.com/blog/Another-Trial)
 (Pattern matching)[]
 (Record)[]
 
