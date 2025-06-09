@@ -1,10 +1,10 @@
 ---
 permalink: /articles/
 title: "Articles"
-link: www.javarchitect.com/blog
+link: https://github.com
 ---
 ### JDK Features: 8 and Beyond
-[Trial](#/Trial-Post)  
+[Trial](#)  
 [Another trial](#/Another-Trial)
 (Pattern matching)[]
 (Record)[]
