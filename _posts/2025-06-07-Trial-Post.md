@@ -3,8 +3,8 @@ title: "Trial"
 categories:
   - Blog
 tags:
-  - Post Formats
-  - quote
+  - sample
+  - trial
 ---
 
 # Introduction
