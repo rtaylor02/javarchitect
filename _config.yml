@@ -59,7 +59,7 @@ plugins:
 
 author:
   name   : "Rodney Taylor"
-  avatar : "/assets/images/bio-photo.jpg"
+  avatar : "/assets/images/linkedin.png"
   bio    : "Hello! My awesome biography constrained to a sentence or two goes here."
   links:
     #- label: "Website"
