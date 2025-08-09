@@ -2,7 +2,7 @@
 permalink: /projects/
 title: "Projects"
 ---
-#React  
+# React  
 [Project1](https://rtaylor02.github.io/project1)  
 # Something  
 [Project2](http://helloworld-containerised-env.eba-jrvjunys.us-east-1.elasticbeanstalk.com/)  
