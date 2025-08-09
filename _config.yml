@@ -19,7 +19,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Java software architect description... Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-twitter_username: username
+#twitter_username: username
 github_username: rtaylor02
 minimal_mistakes_skin: default
 search: true
@@ -65,33 +65,33 @@ author:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://javarchitect.com"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+    #- label: "Twitter"
+      #icon: "fab fa-fw fa-twitter-square"
+      #url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://github.com/rtaylor02"
+    - #label: "Instagram"
+      #icon: "fab fa-fw fa-instagram"
+      #url: "https://instagram.com/"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "www.linkedin.com/in/rodney-taylor-uk"
+      url: "https://www.linkedin.com/in/rodney-taylor-uk"
 
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+    - #label: "Twitter"
+      #icon: "fab fa-fw fa-twitter-square"
+      #url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://github.com/rtaylor02"
+    - #label: "Instagram"
+      #icon: "fab fa-fw fa-instagram"
+      #url: "https://instagram.com/"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "www.linkedin.com/in/rodney-taylor-uk"
+      url: "https://www.linkedin.com/in/rodney-taylor-uk"
 
 defaults:
   # _posts
