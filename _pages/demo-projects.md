@@ -1,6 +1,6 @@
 ---
-permalink: /projects/
-title: "Projects"
+permalink: /demo-projects/
+title: "Demo Projects"
 ---
 ## React  
 [Project1](https://rtaylor02.github.io/project1)  
