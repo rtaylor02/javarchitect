@@ -2,16 +2,6 @@
 permalink: /demo-projects/
 title: "Demo Projects"
 ---
-### React  
-[Architect diagram]()  
-[Project1](https://rtaylor02.github.io/project1)  
-
-
-### Something  
-[Architect diagram]()  
-[Project2](http://helloworld-containerised-env.eba-jrvjunys.us-east-1.elasticbeanstalk.com/)  
-
-
 ### Employee CRUD Management System
 A secure and user-friendly web application built with Spring Boot 3, Spring MVC, Spring Data JPA, and MySQL to manage employee records (Create, Read, Update, Delete).  
 - Security & Config Management – Integrated with AWS Parameter Store to securely store and retrieve application configurations and credentials.  
@@ -27,4 +17,17 @@ A secure and user-friendly web application built with Spring Boot 3, Spring MVC,
 ### Something else  
 [Architect diagram]()  
 [Project 4 - ??](http://luv2code-helloworld-demo-env.eba-unfeznkk.us-east-1.elasticbeanstalk.com/)  
+
+
+### React  
+[Architect diagram]()  
+[Project1](https://rtaylor02.github.io/project1)  
+
+
+### Something  
+[Architect diagram]()  
+[Project2](http://helloworld-containerised-env.eba-jrvjunys.us-east-1.elasticbeanstalk.com/)  
+
+
+
 
