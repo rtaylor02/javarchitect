@@ -1,9 +1,7 @@
 ---
-layout: single
 title: Contact
 permalink: /contact/
 classes: wide
-description: Get in touch with Rodney Taylor (JavaRchitect)
 ---
 
 ## Let’s build something solid together
