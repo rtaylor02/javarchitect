@@ -1,6 +1,7 @@
 ---
 permalink: /contact/
-title: "Contact Us"
+title: "Contact Me"
 ---
 
-Reach out to us at contact@javarchitect.com.
+Get in touch with me via email at contact@javarchitect.com
+Or connect with me in (LinkedIn)[www.linkedin.com/in/rodney-taylor-uk]!
