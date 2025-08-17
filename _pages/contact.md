@@ -1,6 +1,6 @@
 ---
-title: Contact
 permalink: /contact/
+title: "Contact Me"
 classes: wide
 ---
 
