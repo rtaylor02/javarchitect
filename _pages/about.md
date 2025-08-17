@@ -1,6 +1,7 @@
 ---
 permalink: /about/
 title: "About"
+classes: wide
 ---
 
 At **JAVArchitect**, I believe that every solution should be built with precision, care, and a deep understanding of client needs. My focus is not just on writing code, but on delivering **robust, scalable, and maintainable software** that meets your exact requirements and exceeds your expectations.
