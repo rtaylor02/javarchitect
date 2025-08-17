@@ -46,7 +46,8 @@ Performance matters — especially in today’s demanding systems. I help identi
 * Hands-on analysis with tools like JFR, JMC, JVisualVM, and JMeter
 
 ---
-
+  
+  
 ✨ **Your success is my priority.** Whether it’s building a reliable application, boosting performance, or empowering your team with knowledge, I deliver solutions with care, expertise, and precision.
 
 ---
