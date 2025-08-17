@@ -3,20 +3,18 @@ classes: wide
 permalink: /articles/
 title: "Articles"
 ---
-### JDK Features: 8 and Beyond
-[Trial](/blog/Trial-Post)  
-[Another trial](/blog/Another-Trial)  
-[Pattern matching]()  
-[Record]()  
-[Project1](https://rtaylor02.github.io/project1)  
-[Project2](http://helloworld-containerised-env.eba-jrvjunys.us-east-1.elasticbeanstalk.com/)  
-[Project 3 - RDS Demo](http://luv2code-beanstalk-rds-demo-env.eba-s2mmtszh.us-east-1.elasticbeanstalk.com/)  
-[Project 4 - ??](http://luv2code-helloworld-demo-env.eba-unfeznkk.us-east-1.elasticbeanstalk.com/)
+### JDK Features: 8 and Beyond  
+Coming soon!  
 
 ### Multithreading and Concurrency 
+Coming soon!  
 
-### Performance Optimisation and Low Latency
+### Performance Optimisation and Low Latency  
+Coming soon!  
 
-### JVM Related
+### JVM Related  
+Coming soon!  
 
-### Books Recommendation
+### Books Recommendation  
+Coming soon!  
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
