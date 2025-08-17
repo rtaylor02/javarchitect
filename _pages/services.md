@@ -3,12 +3,6 @@ classes: wide
 permalink: /services/
 title: "Services"
 ---
-Perfect 👍 — for your **Services** page on **javarchitect.com**, we want it clear, professional, and client-focused. Each service should highlight **value for the client** and **your unique strength**.
-
-Here’s a draft you can adapt:
-
----
-
 # **Services**
 
 At **JavaRchitect**, I provide tailored Java and software development services designed to help businesses grow, optimise, and perform at their best. Whether you need a new application built from the ground up, expert consultancy, or hands-on training, I bring care and precision to every engagement.
@@ -53,11 +47,7 @@ Performance matters — especially in today’s demanding systems. I help identi
 * Latency and throughput improvements
 * Hands-on analysis with tools like JFR, JMC, JVisualVM, and JMeter
 
----
-
 ✨ **Your success is my priority.** Whether it’s building a reliable application, boosting performance, or empowering your team with knowledge, I deliver solutions with care, expertise, and precision.
 
 ---
-
-Would you like me to also make a **short “Services at a glance” summary** (just a 3–4 bullet list) for your homepage, so visitors get the snapshot before they click into the full Services page?
 
