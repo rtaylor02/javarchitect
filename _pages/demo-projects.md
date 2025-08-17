@@ -1,6 +1,7 @@
 ---
 permalink: /demo-projects/
 title: "Demo Projects"
+classes: wide
 ---
 ### Employee CRUD Management System
 A secure and user-friendly web application built with Spring Boot 3, Spring MVC, Spring Data JPA, and MySQL to manage employee records (Create, Read, Update, Delete).  
