@@ -1,4 +1,5 @@
 ---
+classes: wide
 permalink: /articles/
 title: "Articles"
 ---
