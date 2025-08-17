@@ -10,7 +10,7 @@ A secure and user-friendly web application built with Spring Boot 3, Spring MVC,
 - Cloud Ready – Designed to run seamlessly in AWS environments with minimal configuration changes.
 
 [Architecture diagram]()  
-[Employee CRUD Management System - demo](http://Javarchitect-employee-management-env.eba-eqfyqmpk.us-east-1.elasticbeanstalk.com )  
+[Employee CRUD Management System - demo](http://Javarchitect-employee-management-env.eba-eqfyqmpk.us-east-1.elasticbeanstalk.com)  
 [GitHub repo](https://github.com/rtaylor02/employee_mgt_system)  
 
 
@@ -25,19 +25,19 @@ A full-stack web application for managing a digital library with secure user aut
 - Cloud Deployment: CI/CD pipeline to AWS, leveraging cloud services for scalability, security, and environment management.
 
 [Architecture diagram]()  
-[Internal Library App - demo](http://Javarchitect-employee-management-env.eba-eqfyqmpk.us-east-1.elasticbeanstalk.com )  
+[Internal Library App - demo](http://JAVArtchitect-library-app-env.eba-mvdacdds.eu-west-2.elasticbeanstalk.com)  
+[GitHub repo](https://github.com/rtaylor02/library_app)  
+
+
+### Something  
+[Architecture diagram]()  
+[Internal Library App - demo](http://Javarchitect-employee-management-env.eba-eqfyqmpk.us-east-1.elasticbeanstalk.com)  
 [GitHub repo](https://github.com/rtaylor02/employee_mgt_system)  
 
 
 ### Something  
 [Architecture diagram]()  
-[Internal Library App - demo](http://Javarchitect-employee-management-env.eba-eqfyqmpk.us-east-1.elasticbeanstalk.com )  
-[GitHub repo](https://github.com/rtaylor02/employee_mgt_system)  
-
-
-### Something  
-[Architecture diagram]()  
-[Internal Library App - demo](http://Javarchitect-employee-management-env.eba-eqfyqmpk.us-east-1.elasticbeanstalk.com )  
+[Internal Library App - demo](http://Javarchitect-employee-management-env.eba-eqfyqmpk.us-east-1.elasticbeanstalk.com)  
 [GitHub repo](https://github.com/rtaylor02/employee_mgt_system)  
 
 
