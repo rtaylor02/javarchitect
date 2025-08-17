@@ -3,8 +3,6 @@ classes: wide
 permalink: /services/
 title: "Services"
 ---
-# **Services**
-
 At **JavaRchitect**, I provide tailored Java and software development services designed to help businesses grow, optimise, and perform at their best. Whether you need a new application built from the ground up, expert consultancy, or hands-on training, I bring care and precision to every engagement.
 
 ---
