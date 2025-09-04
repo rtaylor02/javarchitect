@@ -1,6 +1,6 @@
 ---
 permalink: /demo-projects/
-title: ""
+title: "Demo Projects"
 classes: wide
 ---
 ### Employee CRUD Management System
