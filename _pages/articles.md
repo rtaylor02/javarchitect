@@ -7,7 +7,7 @@ title: "Articles"
 Don't get confused on which of the available Java Collection framework to use in any situation. Below is a general guide line on which to use based on what you need:  
 [Java_Collections_decision_flow_chart](../assets/articles/java_collections_mermaidchart.png)  
 
-Sample code: [Github repo](*)  
+Sample code: [Github repo](#)  
 Mermaid chart code: [here](./java-collections-mermaid-chart.md)  
 
 ### JDK Features: 8 and Beyond  
