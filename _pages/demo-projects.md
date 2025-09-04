@@ -1,5 +1,6 @@
 ---
 permalink: /demo-projects/
+title: ""
 classes: wide
 ---
 ### Employee CRUD Management System
