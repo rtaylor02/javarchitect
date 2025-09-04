@@ -25,7 +25,7 @@ A full-stack web application for managing a digital library with secure user aut
   - Late fee payments handled via Stripe payment gateway.
 - Cloud Deployment: CI/CD pipeline to AWS, leveraging cloud services for scalability, security, and environment management.
 
-[Architecture diagram](#)  
+[Architecture diagram](../assets/pages/demo-projects/libraryapp.png)  
 [Internal Library App - demo](http://JAVArtchitect-library-app-env.eba-mvdacdds.eu-west-2.elasticbeanstalk.com)  
 [GitHub repo](https://github.com/rtaylor02/library_app)  
 
