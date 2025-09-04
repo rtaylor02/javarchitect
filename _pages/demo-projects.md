@@ -30,10 +30,16 @@ A full-stack web application for managing a digital library with secure user aut
 [GitHub repo](https://github.com/rtaylor02/library_app)  
 
 
-### Coming Soon!  
-[Architecture diagram](#)  
+### Recruitment Agency Web Application
+A **Spring Boot**-based recruiter/job portal web application that allows job seekers to browse and apply for jobs while enabling recruiters to manage job postings.  
+- The application uses **Thymeleaf** for server-side rendering.
+- **Spring Data JPA** with **Hibernate** for database access.
+- **Spring Security** for authentication & authorization.
+- Deployed to **AWS Elastic Beanstalk** with **AWS RDS (MySQL)** for persistence and **AWS Systems Manager Parameter Store** for secure configuration.
+
+[Architecture diagram](../assets/pages/demo-projects/recruitement_agency.png)  
 [An App - demo](#)  
-[GitHub repo](#)  
+[GitHub repo](https://github.com/rtaylor02/recruitment_agency)  
 
 
 ### Coming Soon!  
