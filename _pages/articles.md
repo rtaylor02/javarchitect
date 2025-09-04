@@ -8,6 +8,7 @@ Don't get confused on which of the available Java Collection framework to use in
 [Java_Collections_decision_flow_chart](../assets/articles/java_collections_mermaidchart.png)  
 
 Sample code: [Github repo](*)
+Mermaid chart code: [here](./java-collections-mermaid-chart.md)
 
 ### JDK Features: 8 and Beyond  
 Coming soon!  
