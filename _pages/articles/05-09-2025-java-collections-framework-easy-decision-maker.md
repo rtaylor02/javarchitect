@@ -103,7 +103,7 @@ Perf: Rare use cases like serialization, object graph traversal.
 > In single-threaded contexts, prefer non-concurrent versions — they’re much faster. For concurrency, always start with ConcurrentHashMap or ConcurrentLinkedQueue before rolling your own synchronization.  
 
 Flow chart based on the description above:
-[Java_Collections_Framework_decision_flow_chart](../assets/articles/java_collections_mermaidchart.png)  
+[Java_Collections_Framework_decision_flow_chart](../assets/articles/05-09-2025-java-collections-mermaid-chart.png)  
 
 Sample code: [Github repo](#)  
-Mermaid chart code: [here](./java-collections-mermaid-chart.md)  
+Mermaid chart code: [here](./articles/05-09-2025-java-collections-mermaid-chart.md)  
