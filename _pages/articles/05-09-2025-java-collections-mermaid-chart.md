@@ -1,3 +1,9 @@
+---
+title: "Java Collections Framework decision flow chart"
+classes: wide
+---
+
+
 ```mermaid
 flowchart TD
 
