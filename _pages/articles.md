@@ -3,12 +3,10 @@ classes: wide
 permalink: /articles/
 title: "Articles"
 ---
-### Java Collection - made easy!
-Don't get confused on which of the available Java Collection framework to use in any situation. Below is a general guide line on which to use based on what you need:  
-[Java_Collections_decision_flow_chart](../assets/articles/java_collections_mermaidchart.png)  
+### Java Data Structures Explained: When to Use ArrayList, HashMap, and More
+Choosing the right data structure in Java can make the difference between code that simply works and code that is truly fast, scalable, and reliable. With the vast toolkit offered by the Java Collections Framework and java.util.concurrent, it’s easy to feel overwhelmed — ArrayList or LinkedList? HashMap or ConcurrentHashMap? BlockingQueue or lock-free alternatives?  
 
-Sample code: [Github repo](#)  
-Mermaid chart code: [here](./java-collections-mermaid-chart.md)  
+In this article, we’ll cut through the noise with clear, practical guidance: which structure to use, when to use it, and why. From performance considerations to concurrency safety, this guide will help you make the smart choice every time.
 
 ### JDK Features: 8 and Beyond  
 Coming soon!  
