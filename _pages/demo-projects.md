@@ -3,7 +3,7 @@ permalink: /demo-projects/
 title: "Demo Projects"
 classes: wide
 ---
-### Employee CRUD Management System
+### 📚 Employee CRUD Management System
 A secure and user-friendly web application built with Spring Boot 3, Spring MVC, Spring Data JPA, and MySQL to manage employee records (Create, Read, Update, Delete).  
 - Security & Config Management – Integrated with AWS Parameter Store to securely store and retrieve application configurations and credentials.  
 - Dynamic UI – Developed with Thymeleaf and Bootstrap for a responsive, intuitive user interface.  
@@ -15,7 +15,7 @@ A secure and user-friendly web application built with Spring Boot 3, Spring MVC,
 [GitHub repo](https://github.com/rtaylor02/employee_mgt_system)  
 
 
-### Internal Library Application
+### 📚 Internal Library Application
 A full-stack web application for managing a digital library with secure user authentication, payment processing, and book review functionality.
 - Backend: Java Spring Boot REST API with MySQL database, deployed on AWS Elastic Beanstalk with RDS for persistence and Parameter Store for secure configuration.
 - Frontend: React (TypeScript) application with responsive design, real-time book search, and user-friendly navigation.
@@ -30,7 +30,7 @@ A full-stack web application for managing a digital library with secure user aut
 [GitHub repo](https://github.com/rtaylor02/library_app)  
 
 
-### Recruitment Agency Web Application
+### 📚 Recruitment Agency Web Application
 A **Spring Boot**-based recruiter/job portal web application that allows job seekers to browse and apply for jobs while enabling recruiters to manage job postings.  
 - The application uses **Thymeleaf** for server-side rendering.
 - **Spring Data JPA** with **Hibernate** for database access.
