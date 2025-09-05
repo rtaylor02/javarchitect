@@ -1,4 +1,4 @@
-# Introduction to Helidon MP: Enterprise Java Microservices, Simplified
+# Introduction to Helidon MP: Enterprise Java Microservices
 
 In today’s cloud-native world, building lightweight, high-performance microservices in Java often means balancing **standards compliance** with **simplicity and speed**. **Helidon MP**, a project from Oracle, does exactly that: it combines the power of **Eclipse MicroProfile** with a minimalistic runtime, offering a modern platform for enterprise Java microservices.
 
