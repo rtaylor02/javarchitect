@@ -1,4 +1,7 @@
-# Java Data Structures Explained: When to Use ArrayList, HashMap, and More
+---
+title: "Java Data Structures Explained: When to Use ArrayList, HashMap, and More"
+classes: wide
+---
 
 Choosing the right data structure in Java can make the difference between code that simply works and code that is truly fast, scalable, and reliable. With the vast toolkit offered by the Java Collections Framework and java.util.concurrent, it’s easy to feel overwhelmed — ArrayList or LinkedList? HashMap or ConcurrentHashMap? BlockingQueue or lock-free alternatives?  
 
