@@ -10,7 +10,7 @@ A secure and user-friendly web application built with Spring Boot 3, Spring MVC,
 - Robust Data Layer – Implemented JPA repositories for efficient database operations and easy maintainability.  
 - Cloud Ready – Designed to run seamlessly in AWS environments with minimal configuration changes.
 
-[Architecture diagram](../assets/pages/demo-projects/employeemgtsystem.png)  
+[Architecture diagram](./images/demo-projects/employeemgtsystem.png)  
 [Employee CRUD Management System - demo](http://Javarchitect-employee-management-env.eba-eqfyqmpk.us-east-1.elasticbeanstalk.com)  
 [GitHub repo](https://github.com/rtaylor02/employee_mgt_system)  
 
@@ -25,7 +25,7 @@ A full-stack web application for managing a digital library with secure user aut
   - Late fee payments handled via Stripe payment gateway.
 - Cloud Deployment: CI/CD pipeline to AWS, leveraging cloud services for scalability, security, and environment management.
 
-[Architecture diagram](../assets/pages/demo-projects/libraryapp.png)  
+[Architecture diagram](./images/demo-projects/libraryapp.png)  
 [Internal Library App - demo](http://JAVArtchitect-library-app-env.eba-mvdacdds.eu-west-2.elasticbeanstalk.com)  
 [GitHub repo](https://github.com/rtaylor02/library_app)  
 
@@ -37,7 +37,7 @@ A **Spring Boot**-based recruiter/job portal web application that allows job see
 - **Spring Security** for authentication & authorization.
 - Deployed to **AWS Elastic Beanstalk** with **AWS RDS (MySQL)** for persistence and **AWS Systems Manager Parameter Store** for secure configuration.
 
-[Architecture diagram](../assets/pages/demo-projects/recruitment_agency.png)  
+[Architecture diagram](./images/demo-projects/recruitment_agency.png)  
 [Recruitment Agency Web Application - demo](#)  
 [GitHub repo](https://github.com/rtaylor02/recruitment_agency)  
 
