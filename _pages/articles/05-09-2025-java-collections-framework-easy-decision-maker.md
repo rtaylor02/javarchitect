@@ -3,6 +3,7 @@ title: "Java Data Structures Explained: When to Use ArrayList, HashMap, and More
 classes: wide
 ---
 
+
 Choosing the right data structure in Java can make the difference between code that simply works and code that is truly fast, scalable, and reliable. With the vast toolkit offered by the Java Collections Framework and java.util.concurrent, it’s easy to feel overwhelmed — ArrayList or LinkedList? HashMap or ConcurrentHashMap? BlockingQueue or lock-free alternatives?  
 
 In this article, we’ll cut through the noise with clear, practical guidance: which structure to use, when to use it, and why. From performance considerations to concurrency safety, this guide will help you make the smart choice every time.  
@@ -106,7 +107,7 @@ Perf: Rare use cases like serialization, object graph traversal.
 > In single-threaded contexts, prefer non-concurrent versions — they’re much faster. For concurrency, always start with ConcurrentHashMap or ConcurrentLinkedQueue before rolling your own synchronization.  
 
 Flow chart based on the description above:
-[Java_Collections_Framework_decision_flow_chart](../assets/articles/05-09-2025-java-collections-mermaid-chart.png)  
+[Java_Collections_Framework_decision_flow_chart](../../assets/articles/05-09-2025-java-collections-mermaid-chart.png)  
 
-Sample code: [Github repo](#)  
-Mermaid chart code: [here](./articles/05-09-2025-java-collections-mermaid-chart.md)  
+**Sample code**: [Github repo](#)  
+**Mermaid chart code**: [here](./05-09-2025-java-collections-mermaid-chart.md)  
