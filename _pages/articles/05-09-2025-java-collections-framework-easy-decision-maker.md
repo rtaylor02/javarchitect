@@ -108,7 +108,7 @@ Perf: Rare use cases like serialization, object graph traversal.
 
 Flow chart based on the description above: 
 [![Java Collections Framework decision flow chart](http://www.javarchitect.com/assets/articles/05-09-2025-java-collections-mermaid-chart.png "Decision flow for Java Collections Framework")](http://www.javarchitect.com/assets/articles/05-09-2025-java-collections-mermaid-chart.png)    
-**[Java Collections Framework decision flow chart](../../assets/articles/05-09-2025-java-collections-mermaid-chart.png)**  
+
 
 **Sample code**: [Github repo](#)  
 **Mermaid chart code**: [here](./05-09-2025-java-collections-mermaid-chart.md)  
