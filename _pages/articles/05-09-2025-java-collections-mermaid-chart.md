@@ -1,5 +1,5 @@
 ---
-title: "Java Collections Framework decision flow chart"
+title: "Java Collections Framework decision flow chart - Mermaid"
 classes: wide
 ---
 
