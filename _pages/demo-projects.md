@@ -38,7 +38,7 @@ A **Spring Boot**-based recruiter/job portal web application that allows job see
 - Deployed to **AWS Elastic Beanstalk** with **AWS RDS (MySQL)** for persistence and **AWS Systems Manager Parameter Store** for secure configuration.
 
 [Architecture diagram](../assets/pages/demo-projects/recruitment_agency.png)  
-[An App - demo](#)  
+[Recruitment Agency Web Application - demo](#)  
 [GitHub repo](https://github.com/rtaylor02/recruitment_agency)  
 
 
