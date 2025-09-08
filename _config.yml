@@ -111,11 +111,6 @@ defaults:
       layout: single
       author_profile: true
 
-# Tell Jekyll what the home page should be
-collections:
-  pages:
-    output: true
-
 category_archive:
   type: liquid
   path: /categories/
