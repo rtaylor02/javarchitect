@@ -3,6 +3,7 @@ layout: home
 classes: wide
 permalink: /articles/
 title: "Articles"
+author_profile: true
 ---
 
 ### [Introduction to Helidon MP!](./articles/06-09-2025-helidon-mp-intro.md)
