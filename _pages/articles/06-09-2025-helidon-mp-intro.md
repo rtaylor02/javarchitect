@@ -45,10 +45,13 @@ Simply click download to access your project.
 ### Using Maven
 A minimal Helidon MP project can be created using Maven:
 ```
-mvn archetype:generate \
- -DarchetypeGroupId=io.helidon.archetypes \
- -DarchetypeArtifactId=helidon-mp \
- -DarchetypeVersion=4.0.0
+mvn -U archetype:generate -DinteractiveMode=false \
+    -DarchetypeGroupId=io.helidon.archetypes \
+    -DarchetypeArtifactId=helidon-quickstart-mp \
+    -DarchetypeVersion=4.1.0 \
+    -DgroupId=com.javarchitect.helidon \
+    -DartifactId=helidon-mp-example \
+    -Dpackage=com.javarchitect.helidon
 ```
 From there, you can define JAX-RS endpoints, add MicroProfile health checks, and run your microservice in a few simple steps.
 
