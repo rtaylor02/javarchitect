@@ -11,7 +11,7 @@ A secure and user-friendly web application built with Spring Boot 3, Spring MVC,
 - Cloud Ready – Designed to run seamlessly in AWS environments with minimal configuration changes.
 
 [Architecture diagram](./images/demo-projects/employeemgtsystem.png)  
-[Employee CRUD Management System - demo](http://Javarchitect-employee-management-env.eba-eqfyqmpk.us-east-1.elasticbeanstalk.com)  
+[Employee CRUD Management System - demo](http://JavaRchitect-demo-empl-mgmt-sys-env.eba-jt6mxsam.eu-west-2.elasticbeanstalk.com)  
 [GitHub repo](https://github.com/rtaylor02/employee_mgt_system)  
 
 
