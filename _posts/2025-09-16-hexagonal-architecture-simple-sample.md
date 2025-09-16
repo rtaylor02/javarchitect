@@ -1,11 +1,7 @@
 ---
-title: "Hexagonal Architecture - Simple Implementation in Java"
+title: "Hexagonal Architecture in Java: A Simple Implementation with Multiple Ports"
 classes: wide
 ---
-
-
-
-# Hexagonal Architecture in Java: A Simple Implementation with Multiple Ports
 
 Hexagonal Architecture, also known as **Ports and Adapters**, is a software architectural style introduced by Alistair Cockburn. Its goal is to isolate the **core business logic** from external systems — such as databases, message brokers, or user interfaces — by putting them behind well-defined **ports** and implementing them through **adapters**.
 
@@ -258,3 +254,10 @@ public class Application {
 
 This simple implementation illustrates the power of Hexagonal Architecture in Java. Even with minimal domain logic, you can see how **ports and adapters provide flexibility and clarity**. The business core is free from infrastructure concerns, making the application more maintainable, extensible, and adaptable to future changes.
 
+---
+
+## Resources
+
+1. [Hexagonal architecture](https://alistair.cockburn.us/hexagonal-architecture/), article by Alistair Cockburn
+2. Github code [here](https://github.com/rtaylor02/hexagonal-architecture-simple)
+3. More sample - Github code [here](https://github.com/rtaylor02/hexagonal-architecture) as per article by [happycoders.eu](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture-java/)
