@@ -5,7 +5,7 @@ main:
     url: /services/
   - title: "Demo Projects"
     url: /demo-projects/
-  - title: "Articles"
-    url: /articles/
+  # - title: "Articles"
+    # url: /articles/
   - title: "Contact"
     url: /contact/
