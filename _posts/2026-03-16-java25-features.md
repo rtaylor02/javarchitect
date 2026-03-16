@@ -3,10 +3,6 @@ title: "Java 25 -- New Features Overview"
 classes: wide
 ---
 
-# Java 25 -- New Features Overview
-
-## Introduction
-
 Java 25 (JDK 25) introduces improvements across the Java language,
 runtime performance, concurrency model, security APIs, and observability
 tooling.
