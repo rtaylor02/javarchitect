@@ -36,7 +36,7 @@ Every distributed system is shaped by three fundamental tensions:
 
 These three axes combine to form the eight saga patterns.
 
-![Dynamic coupling forces axes](../assets/images/2026-04-24-distributed-systems-saga-patterns/dynamic_coupling_forces_axes.png "Dynamic coupling forces")
+![Dynamic coupling forces axes](images/2026-04-24-distributed-systems-saga-patterns/dynamic_coupling_forces_axes.png "Dynamic coupling forces")
 
 ---
 
@@ -67,7 +67,7 @@ Example: Starting a background task, but immediately sitting idle waiting for th
 - Asynchronous & Non-blocking (Modern): You start a task and immediately move on to other work (non-blocking). When the task finishes, you are notified (asynchronous).
 Example: Sending an API request with a callback function; the main thread continues executing other code and handles the result only when the request completes.
 
-![Sample of sync/async blocking/non-blocking combinations](../assets/images/2026-04-24-distributed-systems-saga-patterns/sync_async_blocking_nonblocking_combinations.png "Sample of sync/async blocking/non-blocking combinations")
+![Sample of sync/async blocking/non-blocking combinations](images/2026-04-24-distributed-systems-saga-patterns/sync_async_blocking_nonblocking_combinations.png "Sample of sync/async blocking/non-blocking combinations")
 
 
 #### The Architectural Quantum
@@ -86,7 +86,7 @@ Characteristics of a quantum:
 
 Example:
 
-![Architectural quanta: sample case](../assets/images/2026-04-24-distributed-systems-saga-patterns/sample_problem.png "Study case: 2 architectural quanta - Portfolio Management System & Trade Order Orchestrator")
+![Architectural quanta: sample case](images/2026-04-24-distributed-systems-saga-patterns/sample_problem.png "Study case: 2 architectural quanta - Portfolio Management System & Trade Order Orchestrator")
 
 In the above picture, the microservices on the right side form 1 architectural quanta because of the synchronous communication among the services. 
 
@@ -94,11 +94,11 @@ When Portfolio Management System communicates with Trade Order Orchestrator, 2 t
 
 1. If they communicate synchronously, they form into 1 architectural quantum => architectural characteristics drop to the lower level in the workflow.
 
-![2 architectural quanta becomes 1 architectural quantum](../assets/images/2026-04-24-distributed-systems-saga-patterns/study_case_1_quantum.png "2 architectural quanta becomes 1 architectural quantum")
+![2 architectural quanta becomes 1 architectural quantum](images/2026-04-24-distributed-systems-saga-patterns/study_case_1_quantum.png "2 architectural quanta becomes 1 architectural quantum")
 
 2. If they communicate asynchronously, they stay separated as 2 architectural quanta => architectural characteristics are retained. 
 
-![Architectural quanta are retained](../assets/images/2026-04-24-distributed-systems-saga-patterns/study_case_2_quanta.png "Architectural quanta are retained")
+![Architectural quanta are retained](images/2026-04-24-distributed-systems-saga-patterns/study_case_2_quanta.png "Architectural quanta are retained")
 
 > So how do we determine the communication type should be synchronous or asynchronous? It depends on whether the service need to wait for the response from another service. If so, then it’s synchronous. Also for simplicity, default to synchronous communication.
 
@@ -126,7 +126,7 @@ When a service calls a method in another service, it’s a contract between the 
 
 #### Strict vs. Loose Contracts
 
-![Contract spectrum](../assets/images/2026-04-24-distributed-systems-saga-patterns/contract_spectrum.png "Contract spectrum")
+![Contract spectrum](images/2026-04-24-distributed-systems-saga-patterns/contract_spectrum.png "Contract spectrum")
 
 | | Tight (Strict) | Loose |
 |---|---|---|
@@ -182,15 +182,15 @@ A key design question: should an event carry the **full data payload** or just *
 
 - **Orchestration** — generally one orchestrator per major workflow; it owns state and communicates update points to services.
 
-![Orchestration](../assets/images/2026-04-24-distributed-systems-saga-patterns/orchestration.png "Orchestration")
+![Orchestration](images/2026-04-24-distributed-systems-saga-patterns/orchestration.png "Orchestration")
 
 - **Choreography** — services react to events; no central controller; the workflow emerges from the chain of events.
 
-![Choreography](../assets/images/2026-04-24-distributed-systems-saga-patterns/choreography.png "Choreography")
+![Choreography](images/2026-04-24-distributed-systems-saga-patterns/choreography.png "Choreography")
 
 - **Hybrids** — an orchestrated outer workflow can delegate to choreographed sub-workflows.
 
-![Hybrids](../assets/images/2026-04-24-distributed-systems-saga-patterns/hybrid.png "Hybrids")
+![Hybrids](images/2026-04-24-distributed-systems-saga-patterns/hybrid.png "Hybrids")
 
 ---
 
