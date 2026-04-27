@@ -25,7 +25,7 @@ Runtime dependencies. Example: when Service A calls Service B synchronously, A b
 
 Every distributed system is shaped by three fundamental tensions:
 
-![Spectrum of primal dynamic coupling forces](primal_dynamic_coupling_forces.png "Dynamic coupling forces")
+![Spectrum of primal dynamic coupling forces](./primal_dynamic_coupling_forces.png "Dynamic coupling forces")
 
 
 | Force | Options |
@@ -36,7 +36,7 @@ Every distributed system is shaped by three fundamental tensions:
 
 These three axes combine to form the eight saga patterns.
 
-![Dynamic coupling forces axes](dynamic_coupling_forces_axes.png "Dynamic coupling forces")
+![Dynamic coupling forces axes](./dynamic_coupling_forces_axes.png "Dynamic coupling forces")
 
 ---
 
