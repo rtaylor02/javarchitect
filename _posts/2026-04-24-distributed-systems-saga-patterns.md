@@ -25,7 +25,8 @@ Runtime dependencies. Example: when Service A calls Service B synchronously, A b
 
 Every distributed system is shaped by three fundamental tensions:
 
-![Spectrum of primal dynamic coupling forces](../_pages/articles/images/24-04-2026-distributed-systems-saga-patterns/primal_dynamic_coupling_forces.png "Dynamic coupling forces")
+![Spectrum of primal dynamic coupling forces](./images/2026-04-24-distributed-systems-saga-patterns/primal_dynamic_coupling_forces.png "Dynamic coupling forces")
+
 
 | Force | Options |
 |---|---|
@@ -35,25 +36,39 @@ Every distributed system is shaped by three fundamental tensions:
 
 These three axes combine to form the eight saga patterns.
 
+![Dynamic coupling forces axes](./images/2026-04-24-distributed-systems-saga-patterns/dynamic_coupling_forces_axes.png "Dynamic coupling forces")
+
 ---
 
 ## 1. Communication
 
 ### Synchronous vs. Asynchronous
 
-- **Blocking (sync):** The caller waits. REST, SOAP, RPC (including gRPC).
-- **Non-blocking (async):** The caller does not wait. Request/reply messaging, async REST, streaming, queues, topics, WebSockets.
+#### Blocking vs. Non-blocking
+Subtle difference between synchronous/asynchronous and blocking/non-blocking: 
 
-#### Performance Impact
+- **synchronous/asynchronous**: on a system level
 
-A concrete example using a trade rejection workflow:
+- **blocking/non-blocking**: on a thread level
 
-| Approach | Total Latency |
-|---|---|
-| Synchronous (waiting at each step) | ~2,700 ms |
-| Asynchronous (concurrent calls) | ~425 ms |
+Synchronous/Asynchronous relates to when a task finishes and how the result is handled (flow control), while Blocking/Non-blocking relates to whether the thread is suspended while waiting for a task (resource state). Synchronous tasks run in order, often blocking the thread. Asynchronous tasks run independently, using callbacks for completion.
 
-Async communication can deliver a **~6× performance improvement** in multi-step workflows.
+Examples:
+
+- Synchronous & Blocking (Standard): You call a function, and your code stops (blocks) and waits for the result before moving to the next line.
+Example: Reading a large file from disk; the program pauses until the file is fully loaded. 
+
+- Synchronous & Non-blocking: You start a task and immediately get control back (non-blocking), but you must manually check back (polling) until the task is complete.
+Example: Starting a download, then checking the progress bar every few seconds, but you still wait for that specific download to finish to proceed. 
+
+- Asynchronous & Blocking (Rare/Inefficient): The task runs in the background (asynchronous), but you still stop and wait for it to finish.
+Example: Starting a background task, but immediately sitting idle waiting for the "done" notification. 
+
+- Asynchronous & Non-blocking (Modern): You start a task and immediately move on to other work (non-blocking). When the task finishes, you are notified (asynchronous).
+Example: Sending an API request with a callback function; the main thread continues executing other code and handles the result only when the request completes.
+
+![Sample of sync/async blocking/non-blocking combinations](./images/2026-04-24-distributed-systems-saga-patterns/sync_async_blocking_nonblocking_combinations.png "Sample of sync/async blocking/non-blocking combinations")
+
 
 #### The Architectural Quantum
 
@@ -65,7 +80,27 @@ Characteristics of a quantum:
 - Low external-implementation static coupling
 - Synchronous communication with other quanta
 
-**Key insight:** Synchronous calls create *"dynamic quantum entanglement"* — they couple the operational characteristics of separate services. A slow or unavailable downstream service degrades the entire call chain.
+**Synchronous calls** create *"dynamic quantum entanglement"* — they couple the operational characteristics of separate services. A slow or unavailable downstream service degrades the entire call chain.
+
+**Asynchronous calls**, on the other hand, retains the architecture quantum of individual services in a system. 
+
+Example:
+
+![Architectural quanta: sample case](./images/2026-04-24-distributed-systems-saga-patterns/sample_problem.png "Study case: 2 architectural quanta - Portfolio Management System & Trade Order Orchestrator")
+
+In the above picture, the microservices on the right side form 1 architectural quanta because of the synchronous communication among the services. 
+
+When Portfolio Management System communicates with Trade Order Orchestrator, 2 things can happen:
+
+1. If they communicate synchronously, they form into 1 architectural quantum => architectural characteristics drop to the lower level in the workflow.
+
+![2 architectural quanta becomes 1 architectural quantum](./images/2026-04-24-distributed-systems-saga-patterns/study_case_1_quantum.png "2 architectural quanta becomes 1 architectural quantum")
+
+2. If they communicate asynchronously, they stay separated as 2 architectural quanta => architectural characteristics are retained. 
+
+![Architectural quanta are retained](./images/2026-04-24-distributed-systems-saga-patterns/study_case_2_quanta.png "Architectural quanta are retained")
+
+> So how do we determine the communication type should be synchronous or asynchronous? It depends on whether the service need to wait for the response from another service. If so, then it’s synchronous. Also for simplicity, default to synchronous communication.
 
 #### Trade-off Summary
 
@@ -87,13 +122,11 @@ Characteristics of a quantum:
 
 ### Managing Contracts
 
+When a service calls a method in another service, it’s a contract between the 2 services of what the request and response formats should be like.
+
 #### Strict vs. Loose Contracts
 
-```
-Strict ←————————————————————————————→ Loose
- XML Schema  JSON Schema  GraphQL  Simple JSON  KVP arrays
- RPC/gRPC                Object
-```
+![Contract spectrum](./images/2026-04-24-distributed-systems-saga-patterns/contract_spectrum.png "Contract spectrum")
 
 | | Tight (Strict) | Loose |
 |---|---|---|
@@ -148,8 +181,16 @@ A key design question: should an event carry the **full data payload** or just *
 | Workflow / state management | ✅ Good | ⚠️ Complex |
 
 - **Orchestration** — generally one orchestrator per major workflow; it owns state and communicates update points to services.
+
+![Orchestration](./images/2026-04-24-distributed-systems-saga-patterns/orchestration.png "Orchestration")
+
 - **Choreography** — services react to events; no central controller; the workflow emerges from the chain of events.
+
+![Choreography](./images/2026-04-24-distributed-systems-saga-patterns/choreography.png "Choreography")
+
 - **Hybrids** — an orchestrated outer workflow can delegate to choreographed sub-workflows.
+
+![Hybrids](./images/2026-04-24-distributed-systems-saga-patterns/hybrid.png "Hybrids")
 
 ---
 
