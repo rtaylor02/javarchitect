@@ -1,14 +1,6 @@
 ---
-title: "IDesigning Distributed Systems: 8 Transactional Saga Patterns"
+title: "Designing Distributed Systems: 8 Transactional Saga Patterns"
 classes: wide
----
-
-
-
-# Designing Distributed Systems: 8 Transactional Saga Patterns
-
-> *Mark Richards & Neal Ford, 2026. Based on patterns from "Software Architecture: The Hard Parts" and Chris Richardson's microservices patterns.*
-
 ---
 
 ## Coupling
