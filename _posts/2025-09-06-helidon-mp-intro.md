@@ -39,7 +39,7 @@ Unlike traditional Java EE servers, Helidon MP is **lightweight, fast, and cloud
 ## Getting Started
 ### Using Helidon Project Generator
 Head to [helidon's starter page](https://helidon.io/starter/4.2.6?step=1) for a guided starter project generator.
-![Helidon starter generator](./images/helidon_io_starter.png)  
+![Helidon starter generator](_posts/images/2025-09-06-helidon-mp-intro/helidon_io_starter.png Helidon starter generator)  
 Simply click download to access your project.
 
 ### Using Maven
