@@ -25,6 +25,8 @@ Runtime dependencies. Example: when Service A calls Service B synchronously, A b
 
 Every distributed system is shaped by three fundamental tensions:
 
+![Spectrum of primal dynamic coupling forces](../_pages/articles/images/24-04-2026-distributed-systems-saga-patterns/primal_dynamic_coupling_forces.png "Dynamic coupling forces")
+
 | Force | Options |
 |---|---|
 | **Communication** | Synchronous ↔ Asynchronous |
