@@ -69,14 +69,14 @@ Anti-pattern = a solution that looks like a pattern but turns out to do more dam
 
 ### Data-based Contract Pattern
 
-![Data-based Contract Pattern](../images/posts/architecture_patterns_and_antipatterns/data_based_contract_pattern.png)
+![Data-based Contract Pattern](../assets/images/posts/architecture_patterns_and_antipatterns/data_based_contract_pattern.png)
 
 Characteristics:
 - We transfer hydrated contract to each service
 
 ### Key-based Contract Pattern
 
-![Key-based Contract Pattern](../images/posts/architecture_patterns_and_antipatterns/key_based_contract_pattern.png)
+![Key-based Contract Pattern](../assets/images/posts/architecture_patterns_and_antipatterns/key_based_contract_pattern.png)
 
 Characteristics:
 - We only transfer the values each service needs
@@ -84,7 +84,7 @@ Characteristics:
 
 ### Comparison
 
-![Data-based vs Key-based Contract patterns](../images/posts/architecture_patterns_and_antipatterns/contract_patterns_comparison.png)
+![Data-based vs Key-based Contract patterns](../assets/images/posts/architecture_patterns_and_antipatterns/contract_patterns_comparison.png)
 
 
 ## Anti-Patterns
@@ -123,11 +123,11 @@ a. Table split: clear separation and services can become microservices. A commun
 b. Data domain: table become individual domain
 c. Delegation: one service takes ownership and the other communicates with it
 d. Consolidation: integrating 2 services into 1 microservice
-![Joint ownership scenario](../images/posts/architecture_patterns_and_antipatterns/joint_ownership.png)
+![Joint ownership scenario](../assets/images/posts/architecture_patterns_and_antipatterns/joint_ownership.png)
 	
 ### Common
 > 2 owners => create a (proxy) service to be the owner
-![Common ownership scenario](../images/posts/architecture_patterns_and_antipatterns/common_ownership.png)
+![Common ownership scenario](../assets/images/posts/architecture_patterns_and_antipatterns/common_ownership.png)
 
 Data transfer (i.e. read data I don't own):
 1. Interservice communication
@@ -139,7 +139,7 @@ Data transfer (i.e. read data I don't own):
 
 
 ### Interservice communication
-![Inter-service communication](../images/posts/architecture_patterns_and_antipatterns/inter_service_comms.png)
+![Inter-service communication](../assets/images/posts/architecture_patterns_and_antipatterns/inter_service_comms.png)
 
 | Pros | Cons |
 |------|------|
@@ -147,7 +147,7 @@ Data transfer (i.e. read data I don't own):
 
 
 ### Data replication
-![Data replication](../images/posts/architecture_patterns_and_antipatterns/data_replication.png)
+![Data replication](../assets/images/posts/architecture_patterns_and_antipatterns/data_replication.png)
 
 | Pros | Cons |
 |------|------|
@@ -155,7 +155,7 @@ Data transfer (i.e. read data I don't own):
 
 
 ### In-Memory Cache
-![In-memory replication cache](../images/posts/architecture_patterns_and_antipatterns/in_memory_replicated_cache.png)
+![In-memory replication cache](../assets/images/posts/architecture_patterns_and_antipatterns/in_memory_replicated_cache.png)
 
 | Pros | Cons |
 |------|------|
@@ -163,7 +163,7 @@ Data transfer (i.e. read data I don't own):
 
 
 ### Sidecar Distributed Cache
-![Side car](../images/posts/architecture_patterns_and_antipatterns/side_car.png)
+![Side car](../assets/images/posts/architecture_patterns_and_antipatterns/side_car.png)
 
 | Pros | Cons |
 |------|------|
@@ -171,7 +171,7 @@ Data transfer (i.e. read data I don't own):
 
 
 ### Data Domain (Shared Tables)
-![Data domain](../images/posts/architecture_patterns_and_antipatterns/data_domain.png)
+![Data domain](../assets/images/posts/architecture_patterns_and_antipatterns/data_domain.png)
 
 | Pros | Cons |
 |------|------|
@@ -224,12 +224,12 @@ Caching topologies:
 
 Read:
 - When data available in cache, it takes 4 steps
-![Cache aside - read from cache: 4 steps](../images/posts/architecture_patterns_and_antipatterns/cache_aside_read_from_cache.png)
+![Cache aside - read from cache: 4 steps](../assets/images/posts/architecture_patterns_and_antipatterns/cache_aside_read_from_cache.png)
 - In the event of a cache-miss, it takes 6 steps. This involves lazy-loading the cache with the missing data.
-![Cache-miss: 6 steps](../images/posts/architecture_patterns_and_antipatterns/cache_aside_read_from_db.png)
+![Cache-miss: 6 steps](../assets/images/posts/architecture_patterns_and_antipatterns/cache_aside_read_from_db.png)
 
 Write: takes 4 steps
-![Cache aside - write: 4 steps](../images/posts/architecture_patterns_and_antipatterns/cache_aside_write.png)
+![Cache aside - write: 4 steps](../assets/images/posts/architecture_patterns_and_antipatterns/cache_aside_write.png)
 
 Use case:
 - read-heavy loads
@@ -269,7 +269,7 @@ Read:
 same as cache-aside
 
 Write: takes 5 steps
-![Write Around - write: 5 steps](../images/posts/architecture_patterns_and_antipatterns/write_around__write.png)
+![Write Around - write: 5 steps](../assets/images/posts/architecture_patterns_and_antipatterns/write_around__write.png)
 ?? Write-around skips writing to the cache altogehter??? Or, delete the relevant data?
 
 Use case:
@@ -281,12 +281,12 @@ Use case:
 
 Read:
 - When data available in cache, it takes 4 steps just like cache-aside
-![Read-Through - read from cache: 4 steps](../images/posts/architecture_patterns_and_antipatterns/read_through_read_from_cache.png)
+![Read-Through - read from cache: 4 steps](../assets/images/posts/architecture_patterns_and_antipatterns/read_through_read_from_cache.png)
 - In the event of a cache-miss, it takes 6 steps just like cache-aside but via cache
-![Read-Through - cache-miss: 6 steps](../images/posts/architecture_patterns_and_antipatterns/read_through_read_from_db.png)
+![Read-Through - cache-miss: 6 steps](../assets/images/posts/architecture_patterns_and_antipatterns/read_through_read_from_db.png)
 
 Write: takes 4 steps
-![Read-Through - write: 4 steps](../images/posts/architecture_patterns_and_antipatterns/read_through_write.png)
+![Read-Through - write: 4 steps](../assets/images/posts/architecture_patterns_and_antipatterns/read_through_write.png)
 
 Use case:
 - high consistency
@@ -329,7 +329,7 @@ Influences in caching topologies:
 
 ### Write Behind
 Write: takes 3 steps + async write
-![Write behind async write](../images/posts/architecture_patterns_and_antipatterns/write_behind.png)
+![Write behind async write](../assets/images/posts/architecture_patterns_and_antipatterns/write_behind.png)
 
 Use case:
 - batch-processing applications
@@ -357,22 +357,22 @@ Use case:
 
 || Principle | Summary | Diagram |
 |---|-----------|---------|---------|
-| 1 | **Codebase** | One codebase tracked in version control, many deploys | ![All code in version control](../images/posts/architecture_patterns_and_antipatterns/all_code_in_version_control.png) |
-| 2 | **Dependencies** | Explicitly declare and isolate dependencies | ![Explicitely declared and isolated dependencies](../images/posts/architecture_patterns_and_antipatterns/explicitely_declared_n_isolated_dependencies.png) |
-| 3 | **Config** | Store config in the environment, not in code | ![Strict separation of config from code](../images/posts/architecture_patterns_and_antipatterns/strict_separation_of_config_from_code.png) |
-| 4 | **Backing Services** | Treat backing services (DB, cache, queue) as attached resources | ![Treat backing service as resources](../images/posts/architecture_patterns_and_antipatterns/backing_service_as_resources.png) |
-| 5 | **Build, Release, Run** | Strictly separate build and run stages | ![Build, Release, Run](../images/posts/architecture_patterns_and_antipatterns/build_release_run.png) |
-| 6 | **Processes** | Execute the app as one or more stateless processes | ![Execute as one or more stateless processes](../images/posts/architecture_patterns_and_antipatterns/execute_as_stateless_processes.png) |
-| 7 | **Port Binding** | Export services via port binding | ![Export services via port binding](../images/posts/architecture_patterns_and_antipatterns/export_services_via_port_binding.png) |
-| 8 | **Concurrency** | Scale out via the process model | ![Scale out via the process model](../images/posts/architecture_patterns_and_antipatterns/scale_via_process_model.png) |
-| 9 | **Disposability** | Maximise robustness with fast startup and graceful shutdown | ![Fast startup and graceful shutdown](../images/posts/architecture_patterns_and_antipatterns/fast_startup_graceful_shutdown.png) |
-| 10 | **Dev/Prod Parity** | Keep development, staging, and production as similar as possible | ![Development, staging, and production as similar as possible](../images/posts/architecture_patterns_and_antipatterns/reduce_gaps_between_prod_n_dev.png) |
-| 11 | **Logs** | Treat logs as event streams | ![Logs as event streams](../images/posts/architecture_patterns_and_antipatterns/logs_as_event_stream.png) |
+| 1 | **Codebase** | One codebase tracked in version control, many deploys | ![All code in version control](../assets/images/posts/architecture_patterns_and_antipatterns/all_code_in_version_control.png) |
+| 2 | **Dependencies** | Explicitly declare and isolate dependencies | ![Explicitely declared and isolated dependencies](../assets/images/posts/architecture_patterns_and_antipatterns/explicitely_declared_n_isolated_dependencies.png) |
+| 3 | **Config** | Store config in the environment, not in code | ![Strict separation of config from code](../assets/images/posts/architecture_patterns_and_antipatterns/strict_separation_of_config_from_code.png) |
+| 4 | **Backing Services** | Treat backing services (DB, cache, queue) as attached resources | ![Treat backing service as resources](../assets/images/posts/architecture_patterns_and_antipatterns/backing_service_as_resources.png) |
+| 5 | **Build, Release, Run** | Strictly separate build and run stages | ![Build, Release, Run](../assets/images/posts/architecture_patterns_and_antipatterns/build_release_run.png) |
+| 6 | **Processes** | Execute the app as one or more stateless processes | ![Execute as one or more stateless processes](../assets/images/posts/architecture_patterns_and_antipatterns/execute_as_stateless_processes.png) |
+| 7 | **Port Binding** | Export services via port binding | ![Export services via port binding](../assets/images/posts/architecture_patterns_and_antipatterns/export_services_via_port_binding.png) |
+| 8 | **Concurrency** | Scale out via the process model | ![Scale out via the process model](../assets/images/posts/architecture_patterns_and_antipatterns/scale_via_process_model.png) |
+| 9 | **Disposability** | Maximise robustness with fast startup and graceful shutdown | ![Fast startup and graceful shutdown](../assets/images/posts/architecture_patterns_and_antipatterns/fast_startup_graceful_shutdown.png) |
+| 10 | **Dev/Prod Parity** | Keep development, staging, and production as similar as possible | ![Development, staging, and production as similar as possible](../assets/images/posts/architecture_patterns_and_antipatterns/reduce_gaps_between_prod_n_dev.png) |
+| 11 | **Logs** | Treat logs as event streams | ![Logs as event streams](../assets/images/posts/architecture_patterns_and_antipatterns/logs_as_event_stream.png) |
 | 12 | **Admin Processes** | Run admin/management tasks as one-off processes | |
-| 13 | **API First** |  | ![](../images/posts/architecture_patterns_and_antipatterns/.png) |
-| 14 | **Telemetry** |  | ![Telemetry](../images/posts/architecture_patterns_and_antipatterns/telemetry.png) |
-| 15 | **Authorisation/Authentication** |  | ![Authorisation/Authentication](../images/posts/architecture_patterns_and_antipatterns/auth.png) |defence_in_depth_layers
-| 15 | **Defence in depth layers** |  | ![Defence in depth layers](../images/posts/architecture_patterns_and_antipatterns/defence_in_depth_layers.png) |
+| 13 | **API First** |  | ![](../assets/images/posts/architecture_patterns_and_antipatterns/.png) |
+| 14 | **Telemetry** |  | ![Telemetry](../assets/images/posts/architecture_patterns_and_antipatterns/telemetry.png) |
+| 15 | **Authorisation/Authentication** |  | ![Authorisation/Authentication](../assets/images/posts/architecture_patterns_and_antipatterns/auth.png) |defence_in_depth_layers
+| 15 | **Defence in depth layers** |  | ![Defence in depth layers](../assets/images/posts/architecture_patterns_and_antipatterns/defence_in_depth_layers.png) |
 
 User case:
 - cloud-nativeability
@@ -403,7 +403,7 @@ User case:
 
 ## Few-Shot Prompting
 => guided prompting technique using 2-5 examples for a new similar task.
-![Few-shot prompting](../images/posts/architecture_patterns_and_antipatterns/few_shot_prompting.png)
+![Few-shot prompting](../assets/images/posts/architecture_patterns_and_antipatterns/few_shot_prompting.png)
 
 ## Dynamic Few-Shot Prompting
 
@@ -415,7 +415,7 @@ Benefits:
 - better reliability 
 
 ## LLM-as-Judge
-![LLM-as-Judge](../images/posts/architecture_patterns_and_antipatterns/llm_as_judge.png)
+![LLM-as-Judge](../assets/images/posts/architecture_patterns_and_antipatterns/llm_as_judge.png)
 
 
 
