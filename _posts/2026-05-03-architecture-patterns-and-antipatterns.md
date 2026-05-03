@@ -1,3 +1,9 @@
+---
+title: "Designing Distributed Systems: 8 Transactional Saga Patterns"
+classes: wide
+---
+
+
 I have a new software project. As a solution architect, where should I start?
 
 # Expected Outcomes
