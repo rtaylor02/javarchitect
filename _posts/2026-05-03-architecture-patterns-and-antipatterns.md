@@ -1,5 +1,5 @@
 ---
-title: "Designing Distributed Systems: 8 Transactional Saga Patterns"
+title: "Architecture Patterns and Anti-Patterns"
 classes: wide
 ---
 
