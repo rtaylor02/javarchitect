@@ -1,6 +1,6 @@
 I have a new software project. As a solution architect, where should I start?
 
-# Outcomes
+# Expected Outcomes
 [ ] Differentiate between an architectural style and a pattern, and understand how they fit together in software architecture
 [ ] Identify patterns that you can use to tackle common architecture problems
 [ ] Discover antipatterns to avoid in software architecture
@@ -71,15 +71,16 @@ Anti-pattern = a solution that looks like a pattern but turns out to do more dam
 
 ![Data-based Contract Pattern](../images/posts/architecture_patterns_and_antipatterns/data_based_contract_pattern.png)
 
-Hydrated contract
+Characteristics:
+- We transfer hydrated contract to each service
 
 ### Key-based Contract Pattern
 
 ![Key-based Contract Pattern](../images/posts/architecture_patterns_and_antipatterns/key_based_contract_pattern.png)
 
-Only the values each service needs.
-
-We touch the DB a lot. 
+Characteristics:
+- We only transfer the values each service needs
+- We touch the DB a lot
 
 ### Comparison
 
@@ -96,12 +97,11 @@ How small should your microservices be?
 
 => Triggering multitude events based on multiple state changes or actions.
 
-Service granulity: 
 The higher granularity a system has:
 - The more fault tolerant the system is
 - The lower the performance is due to multiple inter-service communication
 
-5 Disintegrators and 3 Integrators can be found in this document <link to previous Confluence doc>
+There are some disintegrators and integrator that can be used to help break down and consolidate services. More information can be found here: <link to previous Confluence doc>
 
 Consolidating several services into 1 can be a good answer to avoid swarm-of-gnats anti-pattern. Indication of this is when an event triggers all the relevant services, or none of the relevant services.
 
@@ -110,15 +110,23 @@ Consolidating several services into 1 can be a good answer to avoid swarm-of-gna
 > Owner of a table is whoever writes to the table.
 
 3 kinds of ownership:
-1. Single: 1 owner => the service can be a microservice (highest data fidelity)
-2. Joint: 2 owners => options:
-	a. Table split: clear separation and services can become microservices. A communication channel between the 2 services is needed.
-	b. Data domain: table become individual domain
-	c. Delegation: one service takes ownership and the other communicates with it
-	d. Consolidation: integrating 2 services into 1 microservice
-	![Joint ownership scenario](../images/posts/architecture_patterns_and_antipatterns/joint_ownership.png)
+1. Single
+2. Joint
+3. Common
+
+### Single
+1 owner => the service can be a microservice (highest data fidelity)
+
+### Joint
+2 owners => options:
+a. Table split: clear separation and services can become microservices. A communication channel between the 2 services is needed.
+b. Data domain: table become individual domain
+c. Delegation: one service takes ownership and the other communicates with it
+d. Consolidation: integrating 2 services into 1 microservice
+![Joint ownership scenario](../images/posts/architecture_patterns_and_antipatterns/joint_ownership.png)
 	
-3. Common: > 2 owners => create a (proxy) service to be the owner
+### Common
+> 2 owners => create a (proxy) service to be the owner
 ![Common ownership scenario](../images/posts/architecture_patterns_and_antipatterns/common_ownership.png)
 
 Data transfer (i.e. read data I don't own):
@@ -159,7 +167,7 @@ Data transfer (i.e. read data I don't own):
 
 | Pros | Cons |
 |------|------|
-| ✅ network, security, and data latency <br> ✅ scalability and throughput <br> ✅ fault tolerance <br> ✅ no data consistency issues <br> ✅ no custom data synchronization <br> ✅ no data ownership issues ✅ no data volume issues <br> ✅ no data update rate issues | ❌ cold start dependency <br> ❌ fault tolerance dependency |
+| ✅ network, security, and data latency <br> ✅ scalability and throughput <br> ✅ fault tolerance <br> ✅ no data consistency issues <br> ✅ no custom data synchronization <br> ✅ no data ownership issues <br> ✅ no data volume issues <br> ✅ no data update rate issues | ❌ cold start dependency <br> ❌ fault tolerance dependency |
 
 
 ### Data Domain (Shared Tables)
@@ -167,7 +175,7 @@ Data transfer (i.e. read data I don't own):
 
 | Pros | Cons |
 |------|------|
-| ✅ network, security, and data latency <br> ✅ scalability and throughput <br> ✅ fault tolerance <br> ✅ no data consistency issues <br> ✅ no custom data synchronization <br> ✅ no data ownership issues ✅ no data volume issues <br> ✅ no data update rate issues <br> ✅ no cold start dependency | ❌ change control <br> ❌ data ownership <br> ❌ possible security issues <br> ❌ forces the same DBMS for all data |
+| ✅ network, security, and data latency <br> ✅ scalability and throughput <br> ✅ fault tolerance <br> ✅ no data consistency issues <br> ✅ no custom data synchronization <br> ✅ no data ownership issues <br> ✅ no data volume issues <br> ✅ no data update rate issues <br> ✅ no cold start dependency | ❌ change control <br> ❌ data ownership <br> ❌ possible security issues <br> ❌ forces the same DBMS for all data |
 
 
 ### Use Case
@@ -216,9 +224,9 @@ Caching topologies:
 
 Read:
 - When data available in cache, it takes 4 steps
-![Cache aside - write: 4 steps](../images/posts/architecture_patterns_and_antipatterns/cache_aside_read_from_cache.png)
-- In the event of a chache-miss, it takes 6 steps. This involves lazy-loading the cache with the missing data.
-![Cache aside - write: 4 steps](../images/posts/architecture_patterns_and_antipatterns/cache_aside_read_from_db.png)
+![Cache aside - read from cache: 4 steps](../images/posts/architecture_patterns_and_antipatterns/cache_aside_read_from_cache.png)
+- In the event of a cache-miss, it takes 6 steps. This involves lazy-loading the cache with the missing data.
+![Cache-miss: 6 steps](../images/posts/architecture_patterns_and_antipatterns/cache_aside_read_from_db.png)
 
 Write: takes 4 steps
 ![Cache aside - write: 4 steps](../images/posts/architecture_patterns_and_antipatterns/cache_aside_write.png)
@@ -274,8 +282,8 @@ Use case:
 Read:
 - When data available in cache, it takes 4 steps just like cache-aside
 ![Read-Through - read from cache: 4 steps](../images/posts/architecture_patterns_and_antipatterns/read_through_read_from_cache.png)
-- In the event of a chache-miss, it takes 6 steps just like cache-aside but via cache
-![Read-Through - cache-miss: 4 steps](../images/posts/architecture_patterns_and_antipatterns/read_through_read_from_db.png)
+- In the event of a cache-miss, it takes 6 steps just like cache-aside but via cache
+![Read-Through - cache-miss: 6 steps](../images/posts/architecture_patterns_and_antipatterns/read_through_read_from_db.png)
 
 Write: takes 4 steps
 ![Read-Through - write: 4 steps](../images/posts/architecture_patterns_and_antipatterns/read_through_write.png)
@@ -321,7 +329,7 @@ Influences in caching topologies:
 
 ### Write Behind
 Write: takes 3 steps + async write
-![Cache aside - write: 4 steps](../images/posts/architecture_patterns_and_antipatterns/write_behind.png)
+![Write behind async write](../images/posts/architecture_patterns_and_antipatterns/write_behind.png)
 
 Use case:
 - batch-processing applications
@@ -344,8 +352,10 @@ Use case:
 ### Summary of Caching Patterns
 
 ## Continuous Delivery / DevOps Patterns
-12/15 Factor App principles:
-| # | Principle | Summary | Diagram |
+
+### 12/15 Factor App principles
+
+|| Principle | Summary | Diagram |
 |---|-----------|---------|---------|
 | 1 | **Codebase** | One codebase tracked in version control, many deploys | ![All code in version control](../images/posts/architecture_patterns_and_antipatterns/all_code_in_version_control.png) |
 | 2 | **Dependencies** | Explicitly declare and isolate dependencies | ![Explicitely declared and isolated dependencies](../images/posts/architecture_patterns_and_antipatterns/explicitely_declared_n_isolated_dependencies.png) |
@@ -444,7 +454,7 @@ Some important details in architecture documents:
 ## Covering Your Assets
 => continuing to document and present alternatives without ever making an architecture decision.
 
-> Architect's job: present alternatives, articulate the pros and cons, and recommend best solution.
+> **Architect's job**: present alternatives, articulate the pros and cons, and recommend best solution.
 
 ## Vendor King
 => product-dependent architectures leading to a loss of control of architecture and development costs.
@@ -453,7 +463,7 @@ Avoidance techniques:
 - treat vendor app as a service (integration point), not the central of your system
 - anti-corruption layer using message bus
 
-![Vendor as a service](../images/posts/architecture_patterns_and_antipatterns/vendor_app_as_service.png)
+![Vendor as a service](../assets/images/posts/architecture_patterns_and_antipatterns/vendor_app_as_service.png)
 
 ## Witches Brew
 => architectures are designed by groups resulting in a complex mixture of ideas and lack of clear vision
@@ -515,7 +525,7 @@ Avoidance technique:
 => an ad-hoc collection of ill-related ideas, concepts, and components that leads to a brittle architecture.
 
 Architecture by Implication anti-pattern combined with Witches Brew anti-pattern often leads to Stovepipe Architecture anti-pattern.
-![Formation to Stove Pipe anti-pattern](../images/posts/architecture_patterns_and_antipatterns/combo_for_stovepipe.png)
+![Formation leading to Stove Pipe anti-pattern](../assets/images/posts/architecture_patterns_and_antipatterns/combo_for_stovepipe.png)
 
 Symptoms and consequences:
 - lack of proper abstraction
@@ -528,10 +538,10 @@ Symptoms and consequences:
 Use ***qualitative*** analysis to iterate on design, leading to ***quantitative*** analysis.
 
 A business driver will translate to a set of architectural characteristics which lead to an analysis trade-off by an architect:
-![Business drives leads to trade-off analysis](../images/posts/architecture_patterns_and_antipatterns/tradeoff_analysis_process.png)
+![Business drivers leads to trade-off analysis](../assets/images/posts/architecture_patterns_and_antipatterns/tradeoff_analysis_process.png)
 
 Example:
-![Example of trade-off analysis driven by business drives](../images/posts/architecture_patterns_and_antipatterns/tradeoff_analysis_process_sample.png)
+![Example of trade-off analysis driven by business drives](../assets/images/posts/architecture_patterns_and_antipatterns/tradeoff_analysis_process_sample.png)
 
 2 useful principles:
 | Feature | Goldilock Principle | Good-enough Principle |
@@ -541,13 +551,13 @@ Example:
 | Main Use | Balancing variables (e.g., stress, speed) | Decision-making and productivity| 
 
 Architecture styles and their best characteristics:
-![Architecture styles and their best characteristics](../images/posts/architecture_patterns_and_antipatterns/arch_styles_best_characteristics.png)
+![Architecture styles and their best characteristics](../assets/images/posts/architecture_patterns_and_antipatterns/arch_styles_best_characteristics.png)
 
 Diagram for trade-off analysis:
-![Analysing architecture trade-off](../images/posts/architecture_patterns_and_antipatterns/analysing_architecture_tradeoff.png)
+![Analysing architecture trade-off](../assets/images/posts/architecture_patterns_and_antipatterns/analysing_architecture_tradeoff.png)
 
 For example, if the desired architecture characteristics are maintainability, testability, and deployability, then the best architecture style for this scenario is microservices, followed by service-based, event-driven, and space-based:
-![Finding best architecture styles for your need](../images/posts/architecture_patterns_and_antipatterns/architecture_in_competition.png)
+![Finding best architecture styles for your need](../assets/images/posts/architecture_patterns_and_antipatterns/architecture_in_competition.png)
 
 To build your own qualitative analysis:
 1. Choose a suitable scale: e.g. 5 stars => 20% per star
