@@ -117,10 +117,6 @@ It is arguable that the intermediary-based communication encourages stateless pr
 | Clients don’t block local thread execution whilst waiting for a remote server | Remove the need for both client and server to be available at the same time |
 
 
-
-
-
-
 # Sagas
 Saga patterns are considered highly suitable for microservices because they solve one of the biggest problems in distributed systems: ***How do you maintain business consistency across multiple independent services without using a giant distributed transaction?***
 
@@ -140,7 +136,7 @@ Sagas provide a practical way to coordinate workflows across services while pres
 - Orchestration or Choreographed coordination
 - Compensating updates as business-level logic, rather than infrastructure (database) concern, when failure happens
 
-See more information here: <link>
+See more information [here](./2026-04-24-distributed-systems-saga-patterns.md)
 
 # Key Technologies
 ## API Gateways
