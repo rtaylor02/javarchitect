@@ -136,7 +136,7 @@ Sagas provide a practical way to coordinate workflows across services while pres
 - Orchestration or Choreographed coordination
 - Compensating updates as business-level logic, rather than infrastructure (database) concern, when failure happens
 
-See more information [here](http://www.javarchitect.com/distributed-systems-saga-patterns.md)
+See more information [here](http://www.javarchitect.com/distributed-systems-saga-patterns)
 
 # Key Technologies
 ## API Gateways
