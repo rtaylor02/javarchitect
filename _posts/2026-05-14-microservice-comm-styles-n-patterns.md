@@ -151,7 +151,7 @@ About API gateways:
 |   Mapping external calls to internal APIs   |   Network security for inter-microservice comms   |   Use a service mesh instead   |
 |   API key management   |   Protocol rewriting   |   Do this in the microservice   |
 |   Rate limiting   |   Call aggregation & filtering   |   Consider GraphQL or BFF (Backend for Frontend) instead   |
-|   Developer Portals   |       |       |
+|   Developer Portals   |||
 
 > API Gateways are a vendor product - you don’t want your core system smarts in there
 >
