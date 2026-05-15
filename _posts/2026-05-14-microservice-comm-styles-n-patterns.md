@@ -20,16 +20,16 @@ Keywords from the definition above:
 3 Golden Rules of distributed computing:
 1. You can't beam information between 2 points instantly
 2. Sometimes, you can't reach the point you want to talk to
-3. Resource pools are NOT infinite => CPU, network utilisation, memory, disk space
+3. Resource pools are NOT infinite: CPU, network utilisation, memory, disk space
 
 
 # Communication Styles
 ![Dependencies between microservices](../assets/images/posts/microservice_comm_styles_n_patterns/microservices_dependencies.png)
 
 2 main communication styles: 
-1. Request/Response
+1. **Request/Response**  
    ![Request/response communication style](../assets/images/posts/microservice_comm_styles_n_patterns/request_response.png)
-2. Event-driven
+2. **Event-driven**  
    ![Event-driven communication style](../assets/images/posts/microservice_comm_styles_n_patterns/event_driven.png)
 
 | Request/Response | Event-driven |
@@ -45,7 +45,7 @@ A microservice can expose multiple endpoints with different communication styles
 
 
 # Defining Boundaries
-Backwards compatibility is key in having **independent deployability** in microservices. 
+**Backwards compatibility** is key in having **independent deployability** in microservices. 
 
 ![Backwards compatibility for making sure we don't break upstream consumers](../assets/images/posts/microservice_comm_styles_n_patterns/backward_compatibility.png)
 
@@ -56,7 +56,7 @@ Backwards compatibility is key in having **independent deployability** in micros
 ## Information Hiding
 Information hiding holds an important role to ensure backward compatibility.
 
-> Be **explicit** about what is hidden and what is shared#
+> Be **explicit** about what is hidden and what is shared
 >
 > The **more** you hide: the **easier** it is to maintain ***backward compatibility*** and achieve ***independent deployability***. 
 
@@ -65,7 +65,7 @@ Information hiding holds an important role to ensure backward compatibility.
 ## Consumer-First Mindset
 Consumer-first mindset helps us in deciding which information to hide.
 
-This brings us to have an ***outside-in thinking*** rather than inside-out thinking. That is we treat our microservice endpoints like a User Interface (UI): 
+This brings us to have an ***outside-in thinking*** rather than inside-out thinking. That is, we treat our microservice endpoints like a User Interface (UI): 
 - ***who is going to consume your microservices?***
 - ***what are they trying to achieve?***
 - ***what SLOs (Service Level Objectives) do your clients need?***
@@ -77,7 +77,7 @@ This brings us to have an ***outside-in thinking*** rather than inside-out think
 ![An endpoint that only exposes what consumers need](../assets/images/posts/microservice_comm_styles_n_patterns/minimal_exposure.png)
 
 ## Schema-First Design (or Contract-First Design)
-Schema-first design provides consumers of your microservices with explicit schemas. It opens communication with your customers in understanding what they need.
+Schema-first design provides consumers of your microservices with **explicit schemas**. It opens communication with your customers in ***understanding what they need***.
 
 Common use cases:
 - GraphQL APIs: Using SDL (Schema Definition Language) to define types.
@@ -102,7 +102,7 @@ To achieve non-blocking calls, we need to do the calls in **parallel** on separa
 ![Awaiting non-blocking calls](../assets/images/posts/microservice_comm_styles_n_patterns/wait_non_blocking_calls.png)
 
 ## Temporal Decoupling
-Temporal coupling => when two or more processes have to be up and available *at the same time* for an operation to complete.
+Temporal coupling => when *two or more processes* have to be up and available ***at the same time*** for an operation to complete.
 
 To achieve temporal decoupling, we can use intermediaries such as a **broker**.
 
@@ -111,9 +111,9 @@ To achieve temporal decoupling, we can use intermediaries such as a **broker**.
 It is arguable that the intermediary-based communication encourages stateless processing as a response can be received by a different instance:
 ![Stateless processing](../assets/images/posts/microservice_comm_styles_n_patterns/stateless_processing.png)
 
-## Summary
+## Summary  
 | Non-blocking Clients | Temporal Decoupling |
-|---|---|
+| --- | --- |
 | Clients don’t block local thread execution whilst waiting for a remote server | Remove the need for both client and server to be available at the same time |
 
 
@@ -132,9 +132,11 @@ Also, 2-Phase Commit (2PC) causes problems in microservices architecture:
 - Blocking: services hold locks while waiting to commit
 - Poor performance: multiple network round trips and synchronous coordination increase latency
 
+![2-Phase Commit](../assets/images/posts/microservice_comm_styles_n_patterns/2_phase_commit.png)
+
 Sagas provide a practical way to coordinate workflows across services while preserving service autonomy:
-- Orchestration or Choreographed coordination
-- Compensating updates as business-level logic, rather than infrastructure (database) concern, when failure happens
+- **Orchestration** or **Choreographed** coordination
+- **Compensating updates** as business-level logic, rather than infrastructure (database) concern, when failure happens
 
 See more information [here](http://www.javarchitect.com/distributed-systems-saga-patterns)
 
