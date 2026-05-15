@@ -112,10 +112,10 @@ It is arguable that the intermediary-based communication encourages stateless pr
 ![Stateless processing](../assets/images/posts/microservice_comm_styles_n_patterns/stateless_processing.png)
 
 ## Summary  
-| Non-blocking Clients | Temporal Decoupling |
-| --- | --- |
-| Clients don’t block local thread execution whilst waiting for a remote server | Remove the need for both client and server to be available at the same time |
 
+|   Non-blocking Clients   |   Temporal Decoupling   |
+|   --------------------   |   -------------------   |
+|   Clients don’t block local thread execution whilst waiting for a remote server   |   Remove the need for both client and server to be available at the same time   |
 
 # Sagas
 Saga patterns are considered highly suitable for microservices because they solve one of the biggest problems in distributed systems: ***How do you maintain business consistency across multiple independent services without using a giant distributed transaction?***
