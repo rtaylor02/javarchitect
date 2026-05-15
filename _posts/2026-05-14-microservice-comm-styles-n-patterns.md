@@ -144,7 +144,7 @@ See more information [here](http://www.javarchitect.com/distributed-systems-saga
 ## API Gateways
 API Gateways act like networking gateway (bridging 2 networks) with additional features around API access.
 
-About API gateways:
+About API gateways:  
 |   Good Stuff   |   Avoid   |   Notes   |
 |   ----------   |   -----   |   -----   |
 |   Mapping external calls to internal APIs   |   Network security for inter-microservice comms   |   Use a service mesh instead   |
