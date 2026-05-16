@@ -146,8 +146,8 @@ API Gateways act like networking gateway (bridging 2 networks) with additional f
 
 About API gateways:  
 
-|Good Stuff|Avoid|Notes|
-|---|---|---|
+|   Good Stuff   |   Avoid   |   Notes   |
+|   ---   |   ---   |   ---   |
 |Mapping external calls to internal APIs|Network security for inter-microservice comms|Use a service mesh instead|
 |API key management|Protocol rewriting|Do this in the microservice|
 |Rate limiting|Call aggregation & filtering|Consider GraphQL or BFF (Backend for Frontend) instead|
