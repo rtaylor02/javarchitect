@@ -5,17 +5,21 @@ classes: wide
 
 ## Coupling
 
-&rarr; the degree of interdependence between software modules and components. 
+&rarr; the degree of interdependence between software modules and components.
 
 There are two types: **static** and **dynamic**.
 
 ### Static Coupling
 
-Fixed, code/deployment-level dependencies. Example: a shared library, or direct code references — regardless of whether services are actively communicating.
+&rarr; fixed, code/deployment-level dependencies. 
+
+Example: a shared library, or direct code references — regardless of whether services are actively communicating.
 
 ### Dynamic Coupling
 
-Runtime dependencies. Example: when Service A calls Service B synchronously, A becomes temporarily coupled to B's:
+&rarr; runtime dependencies. 
+
+Example: when Service A calls Service B synchronously, A becomes temporarily coupled to B's:
 
 - **Availability** — if B is down, A fails too
 - **Performance** — if B is slow, A is slow
@@ -46,33 +50,37 @@ These three axes combine to form the eight saga patterns.
 
 ### Synchronous vs. Asynchronous
 
+|  Synchronous   |  Asynchronous   |
+|  ---   |  ---   |
+|  Tasks run in order |  Tasks run independently |
+|  Often blocking the thread |  Using callbacks for completion  |
+
 #### Blocking vs. Non-blocking
 Subtle difference between synchronous/asynchronous and blocking/non-blocking: 
 
-- **synchronous/asynchronous**: on a system level
+|  Synchronous/Asynchronous   |  Blocking/Non-blocking   |
+|  ---   |  ---   |
+|  On a system level |  On a thread level |
+|  Relates to when a task finishes and how the result is handled (flow control) |  Relates to whether the thread is suspended while waiting for a task (resource state)  |
 
-- **blocking/non-blocking**: on a thread level
+#### Examples
 
-Synchronous/Asynchronous relates to when a task finishes and how the result is handled (flow control), while Blocking/Non-blocking relates to whether the thread is suspended while waiting for a task (resource state). Synchronous tasks run in order, often blocking the thread. Asynchronous tasks run independently, using callbacks for completion.
-
-Examples:
-
-- Synchronous & Blocking (Standard): You call a function, and your code stops (blocks) and waits for the result before moving to the next line.
+- **Synchronous & Blocking (Standard)**: You call a function, and your code stops (blocks) and waits for the result before moving to the next line.
 Example: Reading a large file from disk; the program pauses until the file is fully loaded. 
 
-- Synchronous & Non-blocking: You start a task and immediately get control back (non-blocking), but you must manually check back (polling) until the task is complete.
+- **Synchronous & Non-blocking**: You start a task and immediately get control back (non-blocking), but you must manually check back (polling) until the task is complete.
 Example: Starting a download, then checking the progress bar every few seconds, but you still wait for that specific download to finish to proceed. 
 
-- Asynchronous & Blocking (Rare/Inefficient): The task runs in the background (asynchronous), but you still stop and wait for it to finish.
+- **Asynchronous & Blocking (Rare/Inefficient)**: The task runs in the background (asynchronous), but you still stop and wait for it to finish.
 Example: Starting a background task, but immediately sitting idle waiting for the "done" notification. 
 
-- Asynchronous & Non-blocking (Modern): You start a task and immediately move on to other work (non-blocking). When the task finishes, you are notified (asynchronous).
+- **Asynchronous & Non-blocking (Modern)**: You start a task and immediately move on to other work (non-blocking). When the task finishes, you are notified (asynchronous).
 Example: Sending an API request with a callback function; the main thread continues executing other code and handles the result only when the request completes.
 
 ![Sample of sync/async blocking/non-blocking combinations](../assets/images/posts/distributed_systems_saga_patterns/sync_async_blocking_nonblocking_combinations.png "Sample of sync/async blocking/non-blocking combinations")
 
 
-#### The Architectural Quantum
+#### Architectural Quantum
 
 > *An architecture quantum establishes the scope for a set of architectural characteristics.*
 
@@ -102,7 +110,11 @@ When Portfolio Management System communicates with Trade Order Orchestrator, 2 t
 
 ![Architectural quanta are retained](../assets/images/posts/distributed_systems_saga_patterns/study_case_2_quanta.png "Architectural quanta are retained")
 
-> So how do we determine the communication type should be synchronous or asynchronous? It depends on whether the service need to wait for the response from another service. If so, then it’s synchronous. Also for simplicity, default to synchronous communication.
+> *So how do we determine the communication type should be synchronous or asynchronous?* 
+> 
+> It depends on whether the service need to wait for the response from another service. If so, then it’s synchronous. 
+> 
+> Also for simplicity, default to synchronous communication.
 
 #### Trade-off Summary
 
@@ -146,13 +158,15 @@ When a service calls a method in another service, it’s a contract between the 
 
 #### Contract Fitness Functions
 
-Consumer-Driven Contracts (CDCs) can automate contract verification. The **Pact** framework ([docs.pact.io](https://docs.pact.io)) supports this for REST and event-driven architectures, with CI/CD integration.
+Consumer-Driven Contracts (CDCs) can automate contract verification. 
+
+The **Pact** framework ([docs.pact.io](https://docs.pact.io)) supports this for REST and event-driven architectures, with CI/CD integration.
 
 ---
 
 ### Event Payload Design
 
-A key design question: should an event carry the **full data payload** or just **key identifiers**?
+A key design question: *should an event carry the **full data payload** or just **key identifiers**?*
 
 | Trade-off Dimension | Full Payload | Key-Only Payload |
 |---|---|---|
@@ -171,28 +185,39 @@ A key design question: should an event carry the **full data payload** or just *
 
 ### Orchestration vs. Choreography
 
+#### Orchestration
+
+- generally one orchestrator per major workflow
+- orchestrator owns state and communicates update points to services
+
+![Orchestration](../assets/images/posts/distributed_systems_saga_patterns/orchestration.png "Orchestration")
+
+#### Choreography
+
+- services react to events
+- no central controller
+- the workflow emerges from the chain of events
+
+![Choreography](../assets/images/posts/distributed_systems_saga_patterns/choreography.png "Choreography")
+
+#### Hybrids
+
+- an orchestrated outer workflow can delegate to choreographed sub-workflows
+
+![Hybrids](../assets/images/posts/distributed_systems_saga_patterns/hybrid.png "Hybrids")
+
+#### Summary
+
 | | Orchestration | Choreography |
 |---|---|---|
 | State owner | Central orchestrator | Distributed across services |
-| Workflow control | Centralised | Emergent / event-driven |
+| Workflow control | Centralised => tighter coupling | Emergent / event-driven => loose coupling |
 | Error handling | ✅ Easier — one place | ⚠️ Harder — spread across services |
 | Responsiveness | Moderate | ✅ High |
 | Scalability / throughput | Moderate | ✅ High |
 | Fault tolerance | ✅ Good | ✅ Better |
 | Recoverability | ✅ Good | ⚠️ Difficult |
 | Workflow / state management | ✅ Good | ⚠️ Complex |
-
-- **Orchestration** — generally one orchestrator per major workflow; it owns state and communicates update points to services.
-
-![Orchestration](../assets/images/posts/distributed_systems_saga_patterns/orchestration.png "Orchestration")
-
-- **Choreography** — services react to events; no central controller; the workflow emerges from the chain of events.
-
-![Choreography](../assets/images/posts/distributed_systems_saga_patterns/choreography.png "Choreography")
-
-- **Hybrids** — an orchestrated outer workflow can delegate to choreographed sub-workflows.
-
-![Hybrids](../assets/images/posts/distributed_systems_saga_patterns/hybrid.png "Hybrids")
 
 ---
 
@@ -204,12 +229,12 @@ A key design question: should an event carry the **full data payload** or just *
 
 In a distributed context, standard ACID properties break down:
 
-| Property | Distributed Problem |
-|---|---|
-| **Atomicity** | Each service commits/rolls back independently — a failure mid-chain leaves partial state |
-| **Consistency** | An error in one service (e.g. inventory) causes data inconsistency across others |
-| **Isolation** | Inserted data may be visible to other services before the overall transaction completes |
-| **Durability** | Data is only made permanent at the service level, not the transaction level |
+| Property | Definition | Distributed Problem |
+|---|---|---|
+| **Atomicity** | A transaction is treated as a single unit of work — either all operations succeed or all are rolled back | Each service commits/rolls back independently — a failure mid-chain leaves partial state |
+| **Consistency** | A transaction moves the system from one valid state to another while preserving all rules and constraints | An error in one service (e.g. inventory) causes data inconsistency across others |
+| **Isolation** | Concurrent transactions do not interfere with each other, and intermediate states are hidden until completion | Inserted data may be visible to other services before the overall transaction completes |
+| **Durability** | Once a transaction is committed, its data is permanently persisted even after crashes or failures | Data is only made permanent at the service level, not the transaction level |
 
 ### BASE Transactions
 
@@ -219,13 +244,13 @@ As an alternative, **BASE** (Basically Available, Soft state, Eventually consist
 
 Three patterns for propagating state changes (e.g. deleting a customer across multiple services):
 
-1. **Background Synchronisation** — a background job reads across databases to sync state.  
+1. **Background Synchronisation** &rarr; a background job reads across databases to sync state.  
    ⚠️ Creates direct database coupling between services.
 
-2. **Event-Based Data Synchronisation** — the originating service fires an event; consumers react.  
+2. **Event-Based Data Synchronisation** &rarr; the originating service fires an event; consumers react.  
    ✅ Decoupled. Standard EDA pattern.
 
-3. **Workflow Event Pattern** — a dedicated workflow processor mediates between the event producer and consumers, handling ordering and retries.
+3. **Workflow Event Pattern** &rarr; a dedicated workflow processor mediates between the event producer and consumers, handling ordering and retries.
 
 ---
 
@@ -238,13 +263,16 @@ When a step fails partway through a distributed transaction, previously committe
 - Side effects may have already occurred (e.g. an email sent, a charge processed)
 - State management becomes complex
 
-**Mitigation:** Marking data as `WIP` vs `PLACED` allows services to avoid querying data not yet in a finalisable state, reducing inconsistency windows.
+**Mitigation:** Marking data as `WIP (Work In Progress)` vs `PLACED` allows services to avoid querying data not yet in a finalisable state, reducing inconsistency windows.
+
+> When a system incorporates process for compensating updates, execution logs is crucial for traceability.
+
 
 ---
 
 ## 4. Transactional Sagas
 
-The eight saga patterns are formed by combining the three coupling forces:
+8 Saga patterns can be formed by combining the 3 coupling forces:
 
 | Saga | Consistency | Coordination | Communication |
 |---|---|---|---|
@@ -351,21 +379,32 @@ Rating scale: `★★★` strong · `★★` moderate · `★` weak · ` ` poor
 
 ### Quantitative Trade-off Summary
 
+![Dynamic coupling forces axes](../assets/images/posts/distributed_systems_saga_patterns/dynamic_coupling_forces_axes.png "Dynamic coupling forces")
+
+Mixing the properties of the 3 axes of dynamic coupling forces, ***Consistency*** choice has the greatest impact on saga quality, followed by ***Coordination*** style then ***Communication*** mode.
+
+**Consistency &rarr; Coordination &rarr; Communication**
+
 | Axis | Impact on Decoupling / Scalability |
 |---|---|
-| Atomic → Eventual consistency | **+163%** improvement |
-| Orchestration → Choreography | **+143%** improvement |
-| Sync → Async communication | **+55%** improvement |
+| **Consistency**: <br> Atomic → Eventual | **+163%** improvement |
+| **Coordination**: <br> Orchestration → Choreography | **+143%** improvement |
+| **Communcation**: Sync → Async | **+55%** improvement |
 
-**Consistency choice** has the greatest impact on saga quality, followed by coordination style, then communication mode.
 
 ---
 
 ### Transactional Sharding
 
-For very high-volume scenarios, **domain sharding** distributes load across multiple saga instances. Example: a concert ticket sale spike can be handled by sharding by seat section or venue zone, avoiding a single transaction bottleneck.
+For very high-volume scenarios, **domain sharding** distributes load across **multiple Saga instances** for better performance/responsiveness. 
+
+Example: a concert ticket sale spike can be handled by sharding by seat section or venue zone, avoiding a single transaction bottleneck.
+
+![Example - transactional sharding by seat section for high volume concert](../assets/images/posts/distributed_systems_saga_patterns/domain_sharding.png "Example - transactional sharding by seat section for high volume concert")
 
 Domain sharding maps naturally onto microservices: services can be sharded by geography or specialisation, allowing concurrent saga instances without contention.
+
+![Example - transactional sharding by geographical location](../assets/images/posts/distributed_systems_saga_patterns/geographical_sharding.png "Example - transactional sharding by geographical location")
 
 ---
 
@@ -374,10 +413,10 @@ Domain sharding maps naturally onto microservices: services can be sharded by ge
 | Principle | Implication |
 |---|---|
 | Synchronous calls create dynamic quantum entanglement | Default to async where responsiveness and scale matter |
-| Looser contracts = less brittle software | Prefer value-based contracts in microservices |
+| Looser contracts = less brittle software | Prefer **value-based** contracts in microservices |
 | Stamp coupling wastes bandwidth | Send only the data a consumer needs |
-| ACID breaks in distributed systems | Accept eventual consistency where business rules allow |
+| ACID breaks in distributed systems | Accept **eventual consistency** where business rules allow |
 | Compensating updates have fallacies | Use state management to reduce inconsistency windows |
 | The Fairy Tale Saga is the default | Use it for most medium-complexity workflows |
-| Horror Story is an antipattern | Avoid atomic + choreography + async |
-| Anthology is the most scalable | Use for pipelines that don't require transactionality |
+| Horror Story Saga is an antipattern | Avoid atomic + choreography + async |
+| Anthology Saga is the most scalable | Use for pipelines that don't require transactionality |
