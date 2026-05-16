@@ -7,10 +7,12 @@ classes: wide
 I have a new software project. As a solution architect, where should I start?
 
 # Expected Outcomes
+
 [ ] Differentiate between an architectural style and a pattern, and understand how they fit together in software architecture
 [ ] Identify patterns that you can use to tackle common architecture problems
 [ ] Discover antipatterns to avoid in software architecture
 [ ] Determine the proper communcation style to derive the most benefit from a particular architecture pattern
+
 We will learn:
 [ ] Key architectural patterns used within modern software architectures
 [ ] The strengths and trade-offs associated with each pattern
