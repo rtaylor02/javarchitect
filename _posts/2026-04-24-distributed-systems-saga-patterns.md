@@ -5,7 +5,9 @@ classes: wide
 
 ## Coupling
 
-**Coupling** is the degree of interdependence between software modules and components. There are two types: **static** and **dynamic**.
+&rarr; the degree of interdependence between software modules and components. 
+
+There are two types: **static** and **dynamic**.
 
 ### Static Coupling
 
