@@ -33,16 +33,18 @@ Every distributed system is shaped by three fundamental tensions:
 
 ![Spectrum of primal dynamic coupling forces](../assets/images/posts/distributed_systems_saga_patterns/primal_dynamic_coupling_forces.png "Dynamic coupling forces")
 
-
-| Force | Options |
-|---|---|
-| **Communication** | Synchronous ↔ Asynchronous |
-| **Consistency** | Atomic ↔ Eventual |
-| **Coordination** | Orchestration ↔ Choreography |
-
-These three axes combine to form the eight saga patterns.
+Each of these forces is acting in their own spectrum axis which combine to form the 8 saga patterns covered later in Section 4.
 
 ![Dynamic coupling forces axes](../assets/images/posts/distributed_systems_saga_patterns/dynamic_coupling_forces_axes.png "Dynamic coupling forces")
+
+| Force | Options | Impact on Distributed System Characteristics
+|---|---|---|
+| **Communication** | Synchronous ↔ Asynchronous | ★★ |
+| **Consistency** | Atomic ↔ Eventual | ★★★ |
+| **Coordination** | Orchestration ↔ Choreography | ★ |
+
+
+The impacts of each of these driving forces will become apparent when we compare 8 different types of sagas based on the permutation of the options.
 
 ---
 
@@ -85,12 +87,12 @@ Example: Sending an API request with a callback function; the main thread contin
 > *An architecture quantum establishes the scope for a set of architectural characteristics.*
 
 Characteristics of a quantum:
-- Independent deployment
+- **Independent** deployment
 - High functional cohesion
 - Low external-implementation static coupling
-- Synchronous communication with other quanta
+- **Synchronous** communication with other quanta
 
-**Synchronous calls** create *"dynamic quantum entanglement"* — they couple the operational characteristics of separate services. A slow or unavailable downstream service degrades the entire call chain.
+**Synchronous calls** create *"dynamic quantum entanglement"* — they couple the operational characteristics of separate services. A slow or unavailable downstream service degrades the entire call chain, i.e. the weakest characteristic of a service becomes the characteristic of the system.
 
 **Asynchronous calls**, on the other hand, retains the architecture quantum of individual services in a system. 
 
@@ -98,7 +100,7 @@ Example:
 
 ![Architectural quanta: sample case](../assets/images/posts/distributed_systems_saga_patterns/sample_problem.png "Study case: 2 architectural quanta - Portfolio Management System & Trade Order Orchestrator")
 
-In the above picture, the microservices on the right side form 1 architectural quanta because of the synchronous communication among the services. 
+In the above picture, the microservices on the right side form 1 architectural quanta because of the **synchronous communication** among the services. 
 
 When Portfolio Management System communicates with Trade Order Orchestrator, 2 things can happen:
 
@@ -112,9 +114,9 @@ When Portfolio Management System communicates with Trade Order Orchestrator, 2 t
 
 > *So how do we determine the communication type should be synchronous or asynchronous?* 
 > 
-> It depends on whether the service need to wait for the response from another service. If so, then it’s synchronous. 
+> It depends on **whether the service needs to wait** for the response from another service. If so, then it’s synchronous. 
 > 
-> Also for simplicity, default to synchronous communication.
+> Also for simplicity, default to synchronous communication. **Synchronous** &rarr; **simpler**
 
 #### Trade-off Summary
 
@@ -136,7 +138,7 @@ When Portfolio Management System communicates with Trade Order Orchestrator, 2 t
 
 ### Managing Contracts
 
-When a service calls a method in another service, it’s a contract between the 2 services of what the request and response formats should be like.
+When a service calls a method in another service, it’s a **contract** between the 2 services of what the request and response formats should be like.
 
 #### Strict vs. Loose Contracts
 
@@ -166,11 +168,11 @@ The **Pact** framework ([docs.pact.io](https://docs.pact.io)) supports this for 
 
 ### Event Payload Design
 
-A key design question: *should an event carry the **full data payload** or just **key identifiers**?*
+> *Should an event carry the **full data payload** or just **key identifiers**?*
 
 | Trade-off Dimension | Full Payload | Key-Only Payload |
 |---|---|---|
-| Scalability & performance | ⚠️ Poor | ✅ Good |
+| Scalability & performance | ✅ Good | ⚠️ Poor |
 | Contract management & versioning | ⚠️ Complex | ✅ Simple |
 | Single system of record | ⚠️ Multiple | ✅ Single |
 | Stamp coupling & bandwidth | ⚠️ High | ✅ Low |
@@ -211,7 +213,7 @@ A key design question: *should an event carry the **full data payload** or just 
 | | Orchestration | Choreography |
 |---|---|---|
 | State owner | Central orchestrator | Distributed across services |
-| Workflow control | Centralised => tighter coupling | Emergent / event-driven => loose coupling |
+| Workflow control | Centralised &rarr; tighter coupling | Emergent / event-driven &rarr; loose coupling |
 | Error handling | ✅ Easier — one place | ⚠️ Harder — spread across services |
 | Responsiveness | Moderate | ✅ High |
 | Scalability / throughput | Moderate | ✅ High |
@@ -225,16 +227,22 @@ A key design question: *should an event carry the **full data payload** or just 
 
 ### ACID Transactions
 
-**Atomicity, Consistency, Isolation, Durability.**
+- **Atomicity** — all steps in a transaction either fully succeed or fully roll back together; there is no partial completion.
+
+- **Consistency** — a transaction always moves the database from one valid state to another, never leaving data in a corrupt or rule-violating state.
+
+- **Isolation** — concurrent transactions are invisible to each other until committed, so one transaction cannot see another's in-progress changes.
+
+- **Durability** — once a transaction is committed, the data is permanently saved and survives any subsequent system failure.
 
 In a distributed context, standard ACID properties break down:
 
-| Property | Definition | Distributed Problem |
-|---|---|---|
-| **Atomicity** | A transaction is treated as a single unit of work — either all operations succeed or all are rolled back | Each service commits/rolls back independently — a failure mid-chain leaves partial state |
-| **Consistency** | A transaction moves the system from one valid state to another while preserving all rules and constraints | An error in one service (e.g. inventory) causes data inconsistency across others |
-| **Isolation** | Concurrent transactions do not interfere with each other, and intermediate states are hidden until completion | Inserted data may be visible to other services before the overall transaction completes |
-| **Durability** | Once a transaction is committed, its data is permanently persisted even after crashes or failures | Data is only made permanent at the service level, not the transaction level |
+| Property | Problem in Distributed Systems |
+|---|---|
+| **Atomicity** | Each service commits/rolls back independently — a failure mid-chain leaves partial state |
+| **Consistency** | An error in one service (e.g. inventory) causes data inconsistency across others |
+| **Isolation** | Inserted data may be visible to other services before the overall transaction completes |
+| **Durability** | Data is only made permanent at the service level, not the transaction level |
 
 ### BASE Transactions
 
@@ -242,15 +250,22 @@ As an alternative, **BASE** (Basically Available, Soft state, Eventually consist
 
 ### Eventual Consistency Patterns
 
-Three patterns for propagating state changes (e.g. deleting a customer across multiple services):
+**Sample problem**: Deleting a customer in one service must propagate to dependent services (wish list, preferences, etc.).
+
+![Sample problem: deleting customer 123 within Distributed Systems - 1 service done, 2 other still have customer 123 in their DB](../assets/images/posts/distributed_systems_saga_patterns/sample_problem.png "Sample problem: deleting customer 123 within Distributed Systems - 1 service done, 2 other still have customer 123 in their DB")
+
+3 patterns for propagating state changes from the sample above:
 
 1. **Background Synchronisation** &rarr; a background job reads across databases to sync state.  
-   ⚠️ Creates direct database coupling between services.
+   ⚠️ Creates direct database coupling between services. <br> 
+   ![Background Synchronisation](../assets/images/posts/distributed_systems_saga_patterns/background_sync.png "Background Synchronisation")
 
 2. **Event-Based Data Synchronisation** &rarr; the originating service fires an event; consumers react.  
-   ✅ Decoupled. Standard EDA pattern.
+   ✅ Decoupled. Standard Event-Driven Architecture pattern. <br> 
+   ![Event-Based Data Synchronisation](../assets/images/posts/distributed_systems_saga_patterns/event_based_data_sync.png "Event-Based Data Synchronisation")
 
-3. **Workflow Event Pattern** &rarr; a dedicated workflow processor mediates between the event producer and consumers, handling ordering and retries.
+3. **Workflow Event Pattern** &rarr; a dedicated workflow processor mediates between the event producer and consumers, handling ordering and retries. <br> 
+   ![Workflow Event Pattern](../assets/images/posts/distributed_systems_saga_patterns/workflow_event_pattern.png "Workflow Event Pattern")
 
 ---
 
@@ -263,7 +278,7 @@ When a step fails partway through a distributed transaction, previously committe
 - Side effects may have already occurred (e.g. an email sent, a charge processed)
 - State management becomes complex
 
-**Mitigation:** Marking data as `WIP (Work In Progress)` vs `PLACED` allows services to avoid querying data not yet in a finalisable state, reducing inconsistency windows.
+**Mitigation (by state management):** Marking data as `WIP (Work-In-Progress)` vs `PLACED` allows services to avoid querying data not yet in a finalisable state, reducing inconsistency windows.
 
 > When a system incorporates process for compensating updates, execution logs is crucial for traceability.
 
@@ -272,41 +287,28 @@ When a step fails partway through a distributed transaction, previously committe
 
 ## 4. Transactional Sagas
 
+![Transactional Sagas](../assets/images/posts/distributed_systems_saga_patterns/transactional_sagas.png "Transactional Sagas")
+
 8 Saga patterns can be formed by combining the 3 coupling forces:
 
-| Saga | Consistency | Coordination | Communication |
+| Saga | Consistency | Communication | Coordination |
 |---|---|---|---|
-| **Epic Saga** | Atomic | Orchestration | Sync |
-| **Fantasy Fiction Saga** | Atomic | Orchestration | Async |
-| **Fairy Tale Saga** | Eventual | Orchestration | Sync |
-| **Parallel Saga** | Eventual | Orchestration | Async |
-| **Phone Tag Saga** | Atomic | Choreography | Sync |
-| **Horror Story Saga** | Atomic | Choreography | Async |
-| **Time Travel Saga** | Eventual | Choreography | Sync |
-| **Anthology Saga** | Eventual | Choreography | Async |
-
----
-
-### Saga Quality Profiles
-
-Rating scale: `★★★` strong · `★★` moderate · `★` weak · ` ` poor
-
-| Saga | Decoupled | Simple | Responsive | Scalable |
-|---|---|---|---|---|
-| Epic Saga | | ★★★ | | |
-| Fantasy Fiction | | ★★ | ★★ | |
-| Fairy Tale | | ★★★ | | |
-| Parallel | | ★★ | ★★ | ★★ |
-| Phone Tag | | ★ | | |
-| Horror Story | ★ | | ★ | |
-| Time Travel | ★★ | ★ | | |
-| Anthology | ★★★ | | ★★ | ★★★ |
+| **Epic Saga** | Atomic | Sync | Orchestration |
+| **Phone Tag Saga** | Atomic | Sync | Choreography |
+| **Fantasy Fiction Saga** | Atomic | Async | Orchestration |
+| **Horror Story Saga** | Atomic | Async | Choreography |
+| **Fairy Tale Saga** | Eventual | Sync | Orchestration |
+| **Time Travel Saga** | Eventual | Sync | Choreography |
+| **Parallel Saga** | Eventual | Async | Orchestration | 
+| **Anthology Saga** | Eventual | Async | Choreography |
 
 ---
 
 ### Saga Descriptions
 
 #### 🗡️ Epic Saga — *"A long-running, heroic story"*
+
+![Epic Saga star rating](../assets/images/posts/distributed_systems_saga_patterns/stars_epic_saga.png "Epic Saga star rating")
 
 - Mimics a non-distributed transactional interaction
 - Holistic transactional coordination increases coupling
@@ -318,6 +320,8 @@ Rating scale: `★★★` strong · `★★` moderate · `★` weak · ` ` poor
 
 #### 📖 Fantasy Fiction Saga — *"A complex story that's hard to believe in the end"*
 
+![Fantasy Fiction Saga star rating](../assets/images/posts/distributed_systems_saga_patterns/stars_fantasy_fiction_saga.png "Fantasy Fiction Saga star rating")
+
 - Moving to async communication improves performance…
 - …but introduces concurrency issues that may be worse than the original performance problems
 
@@ -327,14 +331,18 @@ Rating scale: `★★★` strong · `★★` moderate · `★` weak · ` ` poor
 
 #### 🏡 Fairy Tale Saga — *"An easy story with a pleasant ending"*
 
+![Fairy Tale Saga star rating](../assets/images/posts/distributed_systems_saga_patterns/stars_fairy_tale_saga.png "Fairy Tale Saga star rating")
+
 - Sync + orchestrated = easiest to reason about
-- The orchestrated saga in Richardson's patterns book
+- The **Orchestrated Saga** in [Chris Richardson's Microservices Patterns](https://learning.oreilly.com/library/view/-/9781617294549/) book
 
 **Use when:** Medium to complex workflows that don't need extreme scale. **Default choice for most situations.**
 
 ---
 
 #### ⚡ Parallel Saga — *"Multiple stories running at the same time"*
+
+![Parallel Saga star rating](../assets/images/posts/distributed_systems_saga_patterns/stars_parallel_saga.png "Parallel Saga star rating")
 
 - Orchestrator allows complex workflows with concurrency
 - Highly attractive for complex workflows at high scale
@@ -344,6 +352,8 @@ Rating scale: `★★★` strong · `★★` moderate · `★` weak · ` ` poor
 
 #### 📞 Phone Tag Saga — *"Like the game of phone tag"*
 
+![Phone Tag Saga star rating](../assets/images/posts/distributed_systems_saga_patterns/stars_phone_tag_saga.png "Phone Tag Saga star rating")
+
 - An unusual combination: atomic + choreography
 - Adds scalability to a simple transactional workflow when the orchestrator becomes a bottleneck
 - Not common in practice
@@ -351,6 +361,8 @@ Rating scale: `★★★` strong · `★★` moderate · `★` weak · ` ` poor
 ---
 
 #### 😱 Horror Story Saga — *"A nightmare"*
+
+![Horror Story Saga star rating](../assets/images/posts/distributed_systems_saga_patterns/stars_horror_story_saga.png "Horror Story Saga star rating")
 
 - Attempts atomic workflows without a coordinator, with concurrency on top
 - Workflow, error handling, boundary conditions, and transactionality are spread across domain services
@@ -362,6 +374,8 @@ Rating scale: `★★★` strong · `★★` moderate · `★` weak · ` ` poor
 
 #### ⏳ Time Travel Saga — *"A problem that moves atomically through time"*
 
+![Time Travel Saga star rating](../assets/images/posts/distributed_systems_saga_patterns/stars_time_travel_saga.png "Time Travel Saga star rating")
+
 - No orchestrator makes complex workflows difficult
 - Best for pipeline problems (chain-of-responsibility, pipes-and-filters) with staging or additive workflows
 - Works best when synchronous communication is acceptable
@@ -370,7 +384,9 @@ Rating scale: `★★★` strong · `★★` moderate · `★` weak · ` ` poor
 
 #### 📚 Anthology Saga — *"A loosely associated group of short stories"*
 
-- Richardson's choreographed saga
+![Anthology Saga star rating](../assets/images/posts/distributed_systems_saga_patterns/stars_anthology_saga.png "Anthology Saga star rating")
+
+- The **Choreographed Saga** in [Chris Richardson's Microservices Patterns](https://learning.oreilly.com/library/view/-/9781617294549/) book
 - Polar opposite of the Epic Saga
 - Best for non-transactional pipes-and-filters architecture styles
 - Highly scalable due to lack of coupling
@@ -391,6 +407,26 @@ Mixing the properties of the 3 axes of dynamic coupling forces, ***Consistency**
 | **Coordination**: <br> Orchestration → Choreography | **+143%** improvement |
 | **Communcation**: Sync → Async | **+55%** improvement |
 
+
+---
+
+### Saga Profiles
+
+Below is the 8 transactional sagas score cards:
+
+![Saga profiles](../assets/images/posts/distributed_systems_saga_patterns/saga_profiles.png "Saga profiles")
+
+The table above gives a simplified guidance on the system architecture we should have to achieve the characteristic priorities implied. 
+
+For example, to have a distributed system with low response latency, the table shows below:
+
+![Choice of responsive distributed system architecture](../assets/images/posts/distributed_systems_saga_patterns/responsive_distributed_system_choice.png "Choice of responsive distributed system architecture")
+
+Now the option is just either we want orchestrated or choreographed system. If scalability is the next priority, then anthology saga is the pattern we should follow. If simplicity is, parallel saga is the pattern.
+
+Also from the table we can see that what drives an orchestration system down on scalability and responsiveness is not the orchestration itself but it’s the atomic transactions. Once we tweak the transactions to be eventual consistent, we should expect improvements in responsiveness and scalability of the system.
+
+![Atomic vs eventual orchestrated system for better responsiveness and scalability](../assets/images/posts/distributed_systems_saga_patterns/atomic_vs_eventual.png "Atomic vs eventual orchestrated system for better responsiveness and scalability")
 
 ---
 
@@ -417,6 +453,6 @@ Domain sharding maps naturally onto microservices: services can be sharded by ge
 | Stamp coupling wastes bandwidth | Send only the data a consumer needs |
 | ACID breaks in distributed systems | Accept **eventual consistency** where business rules allow |
 | Compensating updates have fallacies | Use state management to reduce inconsistency windows |
-| The Fairy Tale Saga is the default | Use it for most medium-complexity workflows |
-| Horror Story Saga is an antipattern | Avoid atomic + choreography + async |
-| Anthology Saga is the most scalable | Use for pipelines that don't require transactionality |
+| **Fairy Tale Saga** is the **default** | Use it for most medium-complexity workflows |
+| **Horror Story Saga** is an **antipattern** | Avoid atomic + choreography + async |
+| **Anthology Saga** is the **most scalable** | Use for pipelines that don't require transactionality |
