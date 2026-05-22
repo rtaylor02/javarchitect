@@ -19,11 +19,28 @@ Example: a shared library, or direct code references — regardless of whether s
 
 &rarr; runtime dependencies. 
 
-Example: when Service A calls Service B synchronously, A becomes temporarily coupled to B's:
+Example: when Service A calls Service B *synchronously*, A becomes temporarily coupled to B's:
 
 - **Availability** — if B is down, A fails too
 - **Performance** — if B is slow, A is slow
 - **Error behaviour** — B's errors propagate directly to A
+
+### Transactional Coupling
+
+&rarr; data processing dependencies.
+
+Example: a customer request involves an update to 3 tables in a database. For this update to be atomic, all 3 transaction updates should happen or nothing at all. 
+
+
+### Contract Coupling
+&rarr; data transfer level: data exchange between microservices should agree on the data format being exchange (JSON schema, XML schema, RPC, etc).
+
+More details on Managing Contracts section below.
+
+### Temporal Coupling
+&rarr; availability of the interacting microservices.
+
+Example: microservice A requires microservice B to be available at a specific time to perform some functionality.
 
 ---
 
@@ -70,7 +87,7 @@ Subtle difference between synchronous/asynchronous and blocking/non-blocking:
 - **Synchronous & Blocking (Standard)**: You call a function, and your code stops (blocks) and waits for the result before moving to the next line.
 Example: Reading a large file from disk; the program pauses until the file is fully loaded. 
 
-- **Synchronous & Non-blocking**: You start a task and immediately get control back (non-blocking), but you must manually check back (polling) until the task is complete.
+- **Synchronous & Non-blocking**: You start a task and immediately get control back (non-blocking), but you must manually check back (polling) until the task is complete. 
 Example: Starting a download, then checking the progress bar every few seconds, but you still wait for that specific download to finish to proceed. 
 
 - **Asynchronous & Blocking (Rare/Inefficient)**: The task runs in the background (asynchronous), but you still stop and wait for it to finish.
@@ -93,6 +110,8 @@ Characteristics of a quantum:
 - **Synchronous** communication with other quanta
 
 **Synchronous calls** create *"dynamic quantum entanglement"* — they couple the operational characteristics of separate services. A slow or unavailable downstream service degrades the entire call chain, i.e. the weakest characteristic of a service becomes the characteristic of the system.
+
+> ***Your system is only as good as the least characteristics  ***
 
 **Asynchronous calls**, on the other hand, retains the architecture quantum of individual services in a system. 
 
@@ -177,6 +196,8 @@ The **Pact** framework ([docs.pact.io](https://docs.pact.io)) supports this for 
 | Single system of record | ⚠️ Multiple | ✅ Single |
 | Stamp coupling & bandwidth | ⚠️ High | ✅ Low |
 
+> ***Choose Key-Only Payload if scalability and performance are not the priority***
+
 **Stamp coupling example:** A customer profile returning 500 KB payloads at 2,000 req/s uses ~1,000,000 KB/s of bandwidth. Returning only required fields (~200 bytes) reduces this to ~400 KB/s — a **2,500× reduction**.
 
 > **Looser contracts create less brittle software architectures.**
@@ -227,7 +248,7 @@ The **Pact** framework ([docs.pact.io](https://docs.pact.io)) supports this for 
 
 ### ACID Transactions
 
-- **Atomicity** — all steps in a transaction either fully succeed or fully roll back together; there is no partial completion.
+- **Atomicity** — all steps in a transaction either fully succeed or fully roll back together; there is no partial completion. 
 
 - **Consistency** — a transaction always moves the database from one valid state to another, never leaving data in a corrupt or rule-violating state.
 
@@ -246,7 +267,7 @@ In a distributed context, standard ACID properties break down:
 
 ### BASE Transactions
 
-As an alternative, **BASE** (Basically Available, Soft state, Eventually consistent) is the natural fit for distributed, decoupled systems.
+As an alternative, **BASE** (***B**asically **A**vailable, **S**oft state, **E**ventually consistent*) is the natural fit for distributed, decoupled systems.
 
 ### Eventual Consistency Patterns
 
@@ -291,16 +312,16 @@ When a step fails partway through a distributed transaction, previously committe
 
 8 Saga patterns can be formed by combining the 3 coupling forces:
 
-| Saga | Consistency | Communication | Coordination |
+| Saga | Consistency | Coordination | Communication |
 |---|---|---|---|
-| **Epic Saga** | Atomic | Sync | Orchestration |
-| **Phone Tag Saga** | Atomic | Sync | Choreography |
-| **Fantasy Fiction Saga** | Atomic | Async | Orchestration |
-| **Horror Story Saga** | Atomic | Async | Choreography |
-| **Fairy Tale Saga** | Eventual | Sync | Orchestration |
-| **Time Travel Saga** | Eventual | Sync | Choreography |
-| **Parallel Saga** | Eventual | Async | Orchestration | 
-| **Anthology Saga** | Eventual | Async | Choreography |
+| **Epic Saga** | Atomic | Orchestration | Sync |
+| **Fantasy Fiction Saga** | Atomic | Orchestration | Async |
+| **Phone Tag Saga** | Atomic | Choreography | Sync |
+| **Horror Story Saga** | Atomic | Choreography | Async |
+| **Fairy Tale Saga** | Eventual | Orchestration | Sync |
+| **Parallel Saga** | Eventual | Orchestration |  Async |
+| **Time Travel Saga** | Eventual | Choreography | Sync |
+| **Anthology Saga** | Eventual | Choreography | Async |
 
 ---
 
@@ -322,7 +343,7 @@ When a step fails partway through a distributed transaction, previously committe
 
 ![Fantasy Fiction Saga star rating](../assets/images/posts/distributed_systems_saga_patterns/stars_fantasy_fiction_saga.png "Fantasy Fiction Saga star rating")
 
-- Moving to async communication improves performance…
+- Moving to async communication improves performance/responsiveness…
 - …but introduces concurrency issues that may be worse than the original performance problems
 
 **Use when:** A first attempt at improving an Epic Saga; responsiveness matters more than strict ordering.
@@ -367,6 +388,7 @@ When a step fails partway through a distributed transaction, previously committe
 - Attempts atomic workflows without a coordinator, with concurrency on top
 - Workflow, error handling, boundary conditions, and transactionality are spread across domain services
 - Middling performance coupled with impossible-to-reproduce errors
+- Actually an ***anti-pattern***
 
 ⚠️ **Not uncommon in practice.** Usually a well-intentioned but flawed attempt to achieve high performance with atomicity.
 
@@ -389,7 +411,7 @@ When a step fails partway through a distributed transaction, previously committe
 - The **Choreographed Saga** in [Chris Richardson's Microservices Patterns](https://learning.oreilly.com/library/view/-/9781617294549/) book
 - Polar opposite of the Epic Saga
 - Best for non-transactional pipes-and-filters architecture styles
-- Highly scalable due to lack of coupling
+- Highly scalable due to lack of coupling - the least coupled option
 
 ---
 
@@ -405,7 +427,7 @@ Mixing the properties of the 3 axes of dynamic coupling forces, ***Consistency**
 |---|---|
 | **Consistency**: <br> Atomic → Eventual | **+163%** improvement |
 | **Coordination**: <br> Orchestration → Choreography | **+143%** improvement |
-| **Communcation**: Sync → Async | **+55%** improvement |
+| **Communcation**: <br> Sync → Async | **+55%** improvement |
 
 
 ---
