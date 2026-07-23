@@ -73,6 +73,9 @@ author:
       #icon: "fab fa-fw fa-instagram"
       #url: "https://instagram.com/"
     - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/rodney-taylor-uk"
+    - label: "Digital Twin"
       icon: "fas fa-fw fa-robot"
       url: "https://digital-twin-zx2b.onrender.com"
 
