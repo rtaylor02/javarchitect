@@ -9,3 +9,5 @@ main:
     # url: /articles/
   - title: "Contact"
     url: /contact/
+  - title: "Digital Twin"
+    url: "https://digital-twin-zx2b.onrender.com"
